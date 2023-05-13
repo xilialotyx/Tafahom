@@ -11,6 +11,7 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUser
     list_display = ("username","name", "is_staff", "is_active",)
     list_filter = ("username","name", "is_staff", "is_active",)
+    list_editable = ("name",)
     fieldsets = (
         (None, {"fields": ("username","name", "password")}),
         ("Permissions", {"fields": ("is_staff", "is_active", "groups", "user_permissions")}),
@@ -24,7 +25,7 @@ class CustomUserAdmin(UserAdmin):
             )}
         ),
     )
-    search_fields = ("username",)
+    search_fields = ("username","name",)
     ordering = ("username",)
 
 
