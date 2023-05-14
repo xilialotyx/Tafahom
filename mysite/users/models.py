@@ -7,14 +7,18 @@ from .managers import CustomUserManager
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=150, unique=True)
-    name = models.CharField(max_length=150,null=True)
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    date_joined = models.DateTimeField(default=timezone.now)
+    username = models.CharField(max_length=150, unique=True,verbose_name="نام کاربری")
+    name = models.CharField(max_length=150,null=True,verbose_name="نام و نام خانوادگی")
+    is_staff = models.BooleanField(default=False,verbose_name="کاربر مسئول")
+    is_active = models.BooleanField(default=True,verbose_name="فعال/غیرفعال")
+    date_joined = models.DateTimeField(auto_now_add=True,verbose_name="تاریخ ایجاد")
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []
+
+    class Meta:
+        verbose_name="کاربر"
+        verbose_name_plural="کاربران"
 
     objects = CustomUserManager()
 

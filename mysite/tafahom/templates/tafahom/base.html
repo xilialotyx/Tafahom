@@ -1,0 +1,665 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html;charset=windows-1251">
+
+<head>
+
+    <title>تفاهم نامه ها :. {% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="admin template, admin dashboard, inbox template, calendar template, form validation">
+    <meta name="author" content="DazeinCreative">
+    <meta name="description" content="Administry - Massive Admin Dashboard Template">
+    <link rel="shortcut icon" href="{% static 'tafahom/images/logo-xs.png' %}" type="image/png">
+    <link href="{% static 'tafahom/css/overlay-effects/overlay-effects.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'tafahom/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'tafahom/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'tafahom/css/dripicons.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'tafahom/css/animate/animate.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'tafahom/css/hover/hover-min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'tafahom/css/styles.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'tafahom/css/btr.css' %}" type="text/css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <!--Top Navigation-->
+        <nav class="navbar navbar-default navbar-fixed-top main-top-navbar">
+            <!--Navbar Brand-->
+            <a href="/" class="navbar-brand hidden-xs hidden-sm"><img alt="Admnistry Logo"
+                    src="{% static 'tafahom/images/logo.png' %}"></a>
+            <a href="/" class="navbar-brand visible-xs visible-sm"><img alt="Admnistry Logo"
+                    src="{% static 'tafahom/images/logo-xs.png' %}"></a>
+            <!--Navbar Brand-->
+            <!--Notifications Bar-->
+            <ul class="nav navbar-nav navbar-left">
+                <li class="hidden-xs">
+                    <button class="sidebar-toggle btn" data-tooltip="tooltip" data-placement="bottom" title="سایدبار"><i
+                            class="dripicons-menu"></i></button>
+                </li>
+                <li class="visible-xs">
+                    <button class="sidebar-toggle-xs btn" data-tooltip="tooltip" data-placement="bottom"
+                        title="سایدبار"><i class="dripicons-menu"></i></button>
+                </li>
+                <li class="dropdown notifications-bar">
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="true"
+                        data-tooltip="tooltip" data-placement="bottom" title="اخطار ها">
+                        <i class="dripicons-bell"></i><span
+                            class="label label-success animated infinite pulse">162</span>
+                    </button>
+                    <ul class="dropdown-menu navbar-dropdown-menu" data-dropdown-in="flipInX"
+                        data-dropdown-out="flipOutX" role="menu">
+                        <li>
+                            <div class="list-group list-group-with-big-icons margin-0">
+                                <a href="#" class="list-group-item list-group-item-success">
+                                    <i class="dripicons-meter"></i>
+                                    <span class="label label-success"> مورد قبول </span> <span
+                                        class="label label-default">125</span>
+                                    <p>متنی است بی مفهوم که تشکیل شده از کلمات معنی دار یا بی معنی کنار هم.</p>
+                                    <i class="fa fa-arrow-left"></i>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-info">
+                                    <i class="dripicons-cutlery"></i>
+                                    <span class="label label-info"> پیشفرض </span> <span
+                                        class="label label-default">6</span>
+                                    <p>متنی است بی مفهوم که تشکیل شده از کلمات معنی دار یا بی معنی کنار هم.</p>
+                                    <i class="fa fa-arrow-left"></i>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-warning">
+                                    <i class="dripicons-gear"></i>
+                                    <span class="label label-warning"> اخطار </span> <span
+                                        class="label label-default">22</span>
+                                    <p>متنی است بی مفهوم که تشکیل شده از کلمات معنی دار یا بی معنی کنار هم.</p>
+                                    <i class="fa fa-arrow-left"></i>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-danger">
+                                    <i class="dripicons-lightbulb"></i>
+                                    <span class="label label-danger"> خطر </span> <span
+                                        class="label label-default">8</span>
+                                    <p>متنی است بی مفهوم که تشکیل شده از کلمات معنی دار یا بی معنی کنار هم.</p>
+                                    <i class="fa fa-arrow-left"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!--/Notifications Bar-->
+
+            <!--Search-->
+            <div class="site-search">
+                <form action="http://dazeinstudio.com/administry/administry-big-menu/pages-search.html"> <i
+                        class="fa dripicons-search"></i>
+                    <input type="text" placeholder="جستجو">
+                </form>
+            </div>
+            <!--/Search-->
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false"><img alt="User Image" class="img-circle" src="images/user-blue.png"><span
+                            class="hidden-xs">علی یدالهی
+                            <small>مدیریت</small></span></a>
+                    <ul class="dropdown-menu dropdown-menu-right launcher-pad" data-dropdown-in="flipInX"
+                        data-dropdown-out="flipOutX">
+                        <li class="col-xs-4"><a class="hvr-pop" href="pages-forum.html"><i
+                                    class="dripicons-conversation"></i>فورم <span class="badge">2</span></a>
+                        </li>
+                        <li class="col-xs-4"><a class="hvr-pop" href="pages-chat.html"><i
+                                    class="dripicons-message"></i>چت <span class="badge">28</span></a>
+                        </li>
+                        <li class="col-xs-4"><a class="hvr-pop" href="inbox.html"><i class="dripicons-inbox"></i>اینباکس
+                                <span class="badge">19</span></a>
+                        </li>
+                        <li class="col-xs-4"><a class="hvr-pop" href="widgets-vol-2.html"><i
+                                    class="dripicons-gear"></i>تنطیمات</a>
+                        </li>
+                        <li class="col-xs-4"><a class="hvr-pop" href="pages-faq.html"><i
+                                    class="dripicons-question"></i>سوال و جواب</a>
+                        </li>
+                        <li class="col-xs-4"><a class="hvr-pop" href="pages-timeline.html"><i
+                                    class="dripicons-clock"></i>زمان</a>
+                        </li>
+                        <li class="col-xs-4"><a class="hvr-pop" href="images-gallery.html"><i
+                                    class="dripicons-photo-group"></i>تصاویر</a>
+                        </li>
+                        <li class="col-xs-4"><a class="hvr-pop" href="pages-profile.html"><i
+                                    class="dripicons-user"></i>پروفایل</a>
+                        </li>
+                        <li class="col-xs-4"><a class="hvr-pop" href="pages-search.html"><i
+                                    class="dripicons-zoom-in"></i>جستجو</a>
+                        </li>
+                        <li class="col-xs-12 visible-xs"><a class="pop goaway" href="#"><i
+                                    class="dripicons-exit"></i>خروج</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="btn userbar-toggle" data-tooltip="tooltip" data-placement="bottom"
+                        title="نوار کاربری"><i class="dripicons-scale"></i></button>
+                </li>
+                <li class="hidden-xs">
+                    <button class="goaway btn text-red" data-tooltip="tooltip" data-placement="bottom" title="خروج"><i
+                            class="dripicons-exit"></i></button>
+                </li>
+                <li class="hidden-xs">
+                    <button class="lockme btn text-blue" data-tooltip="tooltip" data-placement="bottom" title="قفل"><i
+                            class="dripicons-lock"></i></button>
+                </li>
+            </ul>
+        </nav>
+        <!--/Top Navigation-->
+
+
+        <!-- Sidebar Wrapper-->
+        <nav class="sidebar-wrapper navbar sidebar">
+            <div class="sidebar-inner">
+                <ul class="nav" id="side-menu">
+                    <li class="active"><a href="index.html"><i class="dripicons-home"></i><span
+                                class="li-text">پیشخوان</span></a>
+                    </li>
+                    <li><a href="inbox.html"><i class="dripicons-archive"></i><span class="li-text">باکس
+                                برنامه</span><span class="badge">6</span></a></li>
+                    <li><a href="#"><i class="dripicons-browser"></i><span class="li-text">پوسته ها</span><span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="layouts.html"><span class="li-text">پوسته</span></a></li>
+                            <li><a href="widgets-panels.html"><span class="li-text">پورتلت</span></a></li>
+                            <li><a href="widgets-vol-1.html"><span class="li-text">ابزارک</span></a></li>
+                            <li><a href="widgets-vol-2.html"><span class="li-text">ابزارک 2</span></a></li>
+                            <li><a href="widgets-vol-3.html"><span class="li-text">ابزارک 3</span><span
+                                        class="badge">جدید</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="dripicons-graph-line"></i><span class="li-text">نمودارها</span><span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="charts-flot.html"><span class="li-text">نمودارها</span><span
+                                        class="label label-info">جدید</span></a></li>
+                            <li><a href="charts-morris.html"><span class="li-text">موریس</span></a></li>
+                            <li><a href="charts-chartjs.html"><span class="li-text">چارت جی اس</span></a></li>
+                            <li><a href="charts-others.html"><span class="li-text">غیره</span></a></li>
+                        </ul>
+                        <!-- /nav-second-level -->
+                    </li>
+                    <li><a href="tables.html"><i class="dripicons-view-thumb"></i><span
+                                class="li-text">جداول</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="tables.html"><span class="li-text">جدول</span></a></li>
+                            <li><a href="tables-datatables.html"><span class="li-text">دیتابیس</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="forms.html"><i class="dripicons-document"></i><span class="li-text">فرمها</span><span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="forms.html"><span class="li-text">فرم ها</span></a></li>
+                            <li><a href="forms-pickers.html"><span class="li-text">فرم های منتخب</span></a></li>
+                            <li><a href="forms-wysiwyg.html"><span class="li-text">WYSIWYG ویراستار</span></a></li>
+                            <li><a href="forms-validation.html"><span class="li-text">اعتبار سنجی فرم</span></a></li>
+                            <li><a href="forms-wizard.html"><span class="li-text">فرم ویزارد</span></a></li>
+                            <li><a href="forms-grid.html"><span class="li-text">فرم شبکه ای</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#"><i class="dripicons-photo"></i><span class="li-text">تصاویر</span><span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="images-basics.html"><span class="li-text">تصاویر پیشفرض</span></a></li>
+                            <li><a href="images-hover-effects.html"><span class="li-text">افکت تصاویر</span></a></li>
+                            <li><a href="images-gallery.html"><span class="li-text">آلبوم تصاویر</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#"><i class="dripicons-toggles"></i><span class="li-text">عناصر صفحه</span><span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="elements-typo.html"><span class="li-text">تایپوگرافی</span></a></li>
+                            <li><a href="#"><span class="li-text">آیکون ها</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="icons-font-awesome.html"><span class="li-text">FontAwesome</span></a>
+                                    </li>
+                                    <li><a href="icons-glyphicons.html"><span class="li-text">GlyphIcons</span></a></li>
+                                    <li><a href="icons-dripicons.html"><span class="li-text">DripIcons</span></a></li>
+                                </ul>
+                                <!-- /nav-third-level -->
+                            </li>
+                            <li><a href="elements-buttons.html"><span class="li-text">دکمه ها</span></a></li>
+                            <li><a href="elements-carousels.html"><span class="li-text">اسلاید شو</span></a></li>
+                            <li><a href="elements-components.html"><span class="li-text">دیدگاه ها</span></a></li>
+                            <li><a href="elements-modals.html"><span class="li-text">مودال ها</span></a></li>
+                            <li><a href="elements-panels.html"><span class="li-text">پنل ها</span></a></li>
+                            <li><a href="elements-nestable-lists.html"><span class="li-text">لیست های آبشاری</span></a>
+                            </li>
+                            <li><a href="elements-popovers.html"><span class="li-text">راهنمای ابزار</span></a></li>
+                            <li><a href="elements-tabs.html"><span class="li-text">زبانک ها</span></a></li>
+                            <li><a href="elements-grid.html"><span class="li-text">لیست شبکه ای</span></a></li>
+                            <li><a href="elements-tree-view.html"><span class="li-text">لیست درختی</span></a></li>
+                            <li><a href="elements-megamenu.html"><span class="li-text">مگامنو</span></a></li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li><a href="#"><i class="dripicons-rocket"></i><span class="li-text">افزودنی ها</span><span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="pages-calendar.html"><span class="li-text">جدول</span></a></li>
+                            <li><a href="pages-timeline.html"><span class="li-text">خط زمان</span></a></li>
+                            <li><a href="pages-profile.html"><span class="li-text">پروفایل</span></a></li>
+                            <li><a href="pages-faq.html"><span class="li-text">سوال و جواب</span></a></li>
+                            <li><a href="pages-lock.html"><span class="li-text">قفل صفحه</span></a></li>
+                            <li><a href="pages-login.html"><span class="li-text">صفحه ورود</span></a></li>
+                            <li><a href="pages-register.html"><span class="li-text">صفحه ثبت نام</span></a></li>
+                            <li><a href="pages-forum.html"><span class="li-text">فرم</span></a></li>
+                            <li><a href="pages-chat.html"><span class="li-text">چت</span></a></li>
+                            <li><a href="pages-search.html"><span class="li-text">نتایج جستجو</span></a></li>
+                            <li><a href="pages-invoice.html"><span class="li-text">صورتحساب</span></a></li>
+                            <li><a href="pages-500.html"><span class="li-text">خطای 500</span></a></li>
+                            <li><a href="pages-404.html"><span class="li-text">خطای 400</span></a></li>
+                            <li><a href="clear.html"><span class="li-text">برگه خالی</span></a></li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li><a href="#"><i class="dripicons-basket"></i><span class="li-text">فروشگاه</span><span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="shop.html"><span class="li-text">فروشگاه</span></a></li>
+                            <li><a href="shop-grid.html"><span class="li-text">فروشگاه شبکه ای</span></a></li>
+                            <li><a href="shop-grid-options.html"><span class="li-text">امکانات فروشگاه</span></a></li>
+                            <li><a href="shop-item.html"><span class="li-text">آیتم فروشگاه</span></a></li>
+                            <li><a href="shop-checkout.html"><span class="li-text">پرداخت </span></a></li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li><a href="#"><i class="dripicons-map"></i><span class="li-text">نقشه ها</span><span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="maps-google.html"><span class="li-text">نقشه های گوگل</span></a></li>
+                            <li><a href="maps-vector.html"><span class="li-text">نقشه های برداری</span></a></li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div class="page-content-wrapper">
+            
+            {% block content %}
+
+            {% endblock %}
+
+        </div>
+        <!--/Page Content -->
+
+        <!--Bottom Bar-->
+        <nav class="bottom-bar">
+            <!--Stats DropUp-->
+            <div class="dropup pull-left">
+                <button class="btn dropdown-toggle btn-stats" type="button" id="dropupstats" data-toggle="dropdown"
+                    data-tooltip="tooltip" data-placement="top" title="آمار فعالیت"><i class="dripicons-meter"></i>
+                </button>
+                <ul class="dropdown-menu dropup-stats" data-dropdown-in="flipInX" data-dropdown-out="flipOutX"
+                    role="menu" aria-labelledby="dropupstats">
+                    <li class="col-md-2 col-sm-3 col-xs-6" role="presentation">
+                        <h5 class="margin-0 margin-bottom-10px">بازدید کندگان</h5>
+                        <span class="piechart-1">3,2,1,5,2,5,9,2,4,7</span>
+                        <h3 class="margin-top-5px margin-bottom-5px">125202</h3>
+                        <small><b> میانگین در ماه : </b> 123498 <span class="text-green"><i
+                                    class="fa fa-caret-down"></i> 1.22%</span></small>
+                    </li>
+                    <li class="col-md-2 col-sm-3 col-xs-6" role="presentation">
+                        <h5 class="margin-0 margin-bottom-10px">نرخ خروج</h5>
+                        <span class="piechart-2">6,2,3,1,5,7,2,3,6,8</span>
+                        <h3 class="margin-top-5px margin-bottom-5px">38,92%</h3>
+                        <small><b>میانگین در ماه :</b> 36,24% <span class="text-green"><i class="fa fa-caret-up"></i>
+                                12%</span></small>
+                    </li>
+                    <li class="col-md-2 col-sm-3 col-xs-6" role="presentation">
+                        <h5 class="margin-0 margin-bottom-10px">بازدید برگه</h5>
+                        <span class="piechart-3">2,2,3,3,6,9,3,2</span>
+                        <h3 class="margin-top-5px margin-bottom-5px">855202</h3>
+                        <small><b>میانگین در ماه :</b> 845329 <span class="text-green"><i class="fa fa-caret-up"></i>
+                                21%</span></small>
+                    </li>
+                    <li class="col-md-2 col-sm-3 col-xs-6" role="presentation">
+                        <h5 class="margin-0 margin-bottom-10px">زمان بازدید</h5>
+                        <span class="piechart-4">6,2,3,4,5,7,6,3,6,8,3,4,5,7,2,3</span>
+                        <h3 class="margin-top-5px margin-bottom-5px">00:04:28</h3>
+                        <small><b>میانگین در ماه :</b> 00:04:12 <span class="text-green"><i class="fa fa-caret-up"></i>
+                                33%</span></small>
+                    </li>
+                    <li class="col-md-2 col-sm-3 col-xs-6" role="presentation">
+                        <h5 class="margin-0 margin-bottom-10px">ترافیک</h5>
+                        <span class="piechart-5">2,8,1</span>
+                        <h3 class="margin-top-5px margin-bottom-5px">99234</h3>
+                        <small><b>میانگین در ماه :</b> 83498 <span class="text-green"><i class="fa fa-caret-up"></i>
+                                2%</span></small>
+                    </li>
+                    <li class="col-md-2 col-sm-3 col-xs-6" role="presentation">
+                        <h5 class="margin-0 margin-bottom-10px">مرورگرهر</h5>
+                        <span class="piechart-6">6,1</span>
+                        <h3 class="margin-top-5px margin-bottom-5px">65,32%</h3>
+                        <small><b>میانگین در ماه :</b> 123498 <span class="text-green"><i class="fa fa-caret-up"></i>
+                                3.5%</span></small>
+                    </li>
+                </ul>
+            </div>
+            <!--/Stats DropUp-->
+            <button class="btn scrollToTop pull-right" data-tooltip="tooltip" data-placement="top" title="بالا رفتن"><i
+                    class="dripicons-arrow-up"></i></button>
+            <div class="btn-group dropup pull-right">
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" data-tooltip="tooltip" data-placement="left" title="سبک"><i
+                        class="dripicons-brightness-medium"></i></button>
+                <ul class="dropdown-menu change-style">
+                    <li class="animated bounceInLeft"><a href="#" id="load-yellow-styles"><i
+                                class="fa fa-circle fa-3x text-yellow"></i></a></li>
+                    <li class="animated bounceInRight"><a href="#" id="load-green-styles"><i
+                                class="fa fa-circle fa-3x text-green"></i></a></li>
+                    <li class="animated bounceInLeft"><a href="#" id="load-khaki-styles"><i
+                                class="fa fa-circle fa-3x text-khaki"></i></a></li>
+                    <li class="animated bounceInRight"><a href="#" id="load-blue-styles"><i
+                                class="fa fa-circle fa-3x text-blue"></i></a></li>
+                    <li class="animated bounceInRight"><a href="#" id="load-pink-styles"><i
+                                class="fa fa-circle fa-3x text-pink"></i></a></li>
+                    <li class="animated bounceInLeft"><a href="#" id="load-default-styles"><i
+                                class="fa fa-ban fa-3x"></i></a></li>
+                </ul>
+            </div>
+
+            <!--Clear LocalStorage-->
+            <button class="btn pull-right oaken-clear" data-tooltip="tooltip" data-placement="top"
+                title="پاک کردن داده ها"><i class="dripicons-trash"></i></button>
+            <!--/Clear LocalStorage-->
+        </nav>
+        <!--/Bottom Bar-->
+
+        <!-- UserBar -->
+        <nav class="userbar-wrapper">
+            <div class="tabs tabs-default-dark">
+                <ul id="myTab" class="nav nav-tabs nav-justified" role="tablist">
+                    <li class="active"><a href="#userbarHome" role="tab" data-toggle="tab"><i
+                                class="dripicons-user"></i></a></li>
+                    <li><a href="#userbarEvents" role="tab" data-toggle="tab"><i class="dripicons-calendar"></i></a>
+                    </li>
+                    <li><a href="#userbarChat" role="tab" data-toggle="tab"><i class="dripicons-message"></i></a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+
+                    <!--Userbar HomeTab-->
+                    <div class="tab-pane active" id="userbarHome">
+                        <div class="user-main-area text-center">
+                            <div class="user-img margin-bottom-10px">
+                                <img alt="User" src="images/user-blue.png">
+                            </div>
+                            <h4>علی یدالهی</h4>
+                            <span class="label label-danger margin-bottom-20px">مدیریت</span>
+                            <ul class="list-unstyled launcher-pad">
+                                <li class="col-xs-4"><a class="hvr-pop" href="pages-forum.html"><i
+                                            class="dripicons-conversation"></i>فرم ها <span class="badge">2</span></a>
+                                </li>
+                                <li class="col-xs-4"><a class="hvr-pop" href="pages-chat.html"><i
+                                            class="dripicons-message"></i>چت <span class="badge">28</span></a>
+                                </li>
+                                <li class="col-xs-4"><a class="hvr-pop" href="inbox.html"><i
+                                            class="dripicons-inbox"></i>اینباکس <span class="badge">19</span></a>
+                                </li>
+                                <li class="col-xs-4"><a class="hvr-pop" href="widgets-vol-2.html"><i
+                                            class="dripicons-gear"></i>تنظیمات</a>
+                                </li>
+                                <li class="col-xs-4"><a class="hvr-pop" href="pages-faq.html"><i
+                                            class="dripicons-question"></i>پرسش و پاسخ</a>
+                                </li>
+                                <li class="col-xs-4"><a class="hvr-pop" href="pages-timeline.html"><i
+                                            class="dripicons-clock"></i>خط طمان</a>
+                                </li>
+                                <li class="col-xs-4"><a class="hvr-pop" href="images-gallery.html"><i
+                                            class="dripicons-photo-group"></i>تصاویر</a>
+                                </li>
+                                <li class="col-xs-4"><a class="hvr-pop" href="pages-profile.html"><i
+                                            class="dripicons-user"></i>پروفایل</a>
+                                </li>
+                                <li class="col-xs-4"><a class="hvr-pop" href="pages-search.html"><i
+                                            class="dripicons-zoom-in"></i>جستجو</a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <h5 class="margin-bottom-20px">وضعیت کل سیستم</h5>
+                        <h6>مقدار ضرفیت<small class="pull-left text-blue"><i class="fa fa-arrow-up"></i> 20%</small>
+                        </h6>
+                        <div class="progress progress-bar-xs">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40"
+                                aria-valuemin="0" aria-valuemax="100" style="width: 10%"> <span class="sr-only">40%
+                                    تکمیل شده (با موفقیت)</span>
+                            </div>
+                        </div>
+                        <h6>حافظه استفاده شده<small class="pull-left text-blue"><i class="fa fa-arrow-up"></i>
+                                60%</small></h6>
+                        <div class="progress progress-bar-xs">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40"
+                                aria-valuemin="0" aria-valuemax="100" style="width: 60%"> <span class="sr-only">40%
+                                    تکمیل شده (با موفقیت)</span>
+                            </div>
+                        </div>
+                        <h6>فضای استفاده شده<small class="pull-left text-blue"><i class="fa fa-arrow-up"></i>
+                                30%</small></h6>
+                        <div class="progress progress-bar-xs">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40"
+                                aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40%
+                                    تکمیل شده (با موفقیت)</span>
+                            </div>
+                        </div>
+                        <h6 class="clearfix">دیسک استفاده شده</h6>
+                        <div class="progress progress-bar-xs bg-blue">
+                            <div class="progress-bar bg-red tooltiped" style="width: 20%" data-toggle="tooltip"
+                                data-placement="top" title="27Gb اطلاعات">
+                            </div>
+                            <div class="progress-bar bg-white tooltiped" style="width: 20%" data-toggle="tooltip"
+                                data-placement="top" title="500Gb آپلود">
+                            </div>
+                        </div>
+                    </div>
+                    <!--/Userbar HomeTab-->
+
+                    <!--Userbar EventsTab-->
+                    <div class="tab-pane" id="userbarEvents">
+                        <h4>رخدادها</h4>
+                        <div class="date-lg" id="displayMoment"></div>
+                        <div class="userbar-calendar">
+                            <div id="userbar-calendar"></div>
+                        </div>
+                    </div>
+                    <!--/Userbar EventsTab-->
+
+                    <!--Userbar ChatListTab-->
+                    <div class="tab-pane" id="userbarChat">
+                        <!--Users Menu-->
+                        <div class="chat-users-menu chat-app-users-menu">
+                            <ul>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">جئان
+                                            یونگ</span><small class="last-words">متنی است بی مفهوم که تشکیل شده از کلمات
+                                            معنی دار یا بی معنی کنار هم</small><span class="user-img"><img
+                                                src="images/user-blue.png" alt="User" /></span><span
+                                            class="round-label bg-green"></span><span class="badge">5</span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">دبرا
+                                            گراوس</span><small class="last-words">متنی است بی مفهوم که تشکیل شده از
+                                            کلمات معنی دار یا بی معنی کنار هم</small><span class="user-img"><img
+                                                src="images/user-green-alt.png" alt="User" /></span><span
+                                            class="round-label bg-green"></span><span class="badge">5</span><span
+                                            class="device"><i class="icon-touchscreen_smartphone"></i></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">مارتین
+                                            وارد</span><small class="last-words">متنی است بی مفهوم که تشکیل شده از کلمات
+                                            معنی دار یا بی معنی کنار هم</small><span class="user-img"><img
+                                                src="images/user-green.png" alt="User" /></span><span
+                                            class="round-label label-default"></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">شرلی
+                                            هورد</span><small class="last-words">متنی است بی مفهوم که تشکیل شده از کلمات
+                                            معنی دار یا بی معنی کنار هم</small><span class="user-img"><img
+                                                src="images/user-khaki.png" alt="User" /></span><span
+                                            class="round-label bg-green"></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">آقای
+                                            جوکر</span><span class="user-img"><img src="images/user-orange.png"
+                                                alt="User" /></span><span class="round-label bg-red"></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">چوباسکا</span><span
+                                            class="user-img"><img src="images/user-red.png" alt="User" /></span><span
+                                            class="round-label bg-red"></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">پیگی</span><span
+                                            class="user-img"><img src="images/user-violet.png" alt="User" /></span><span
+                                            class="round-label bg-orange"></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">جوان یان</span><span
+                                            class="user-img"><img src="images/user.png" alt="User" /></span><span
+                                            class="round-label bg-orange"></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">مارتین
+                                            وارد</span><span class="user-img"><img src="images/user-orange.png"
+                                                alt="User" /></span><span class="round-label bg-green"></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">شرلی
+                                            هورد</span><span class="user-img"><img src="images/user-green-alt.png"
+                                                alt="User" /></span><span class="round-label bg-green"></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">جان یونگ</span><span
+                                            class="user-img"><img src="images/user-red.png" alt="User" /></span><span
+                                            class="round-label bg-green"></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">مارتین
+                                            ورد</span><span class="user-img"><img src="images/user.png"
+                                                alt="User" /></span><span class="round-label bg-green"></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">شرلی
+                                            هورد</span><span class="user-img"><img src="images/user-blue.png"
+                                                alt="User" /></span><span class="round-label bg-green"></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">جان یونگ</span><span
+                                            class="user-img"><img src="images/user-blue.png" alt="User" /></span><span
+                                            class="round-label bg-green"></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">مارتین</span><span
+                                            class="user-img"><img src="images/user-khaki.png" alt="User" /></span><span
+                                            class="round-label bg-red"></span></a>
+                                </li>
+                                <li><a class="chat-overlay-button" href="#"><span class="chat-name">شرلی</span><span
+                                            class="user-img"><img src="images/user-brown.png" alt="User" /></span><span
+                                            class="round-label bg-red"></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--/Users Menu-->
+                    </div>
+                    <!--/Userbar ChatListTab-->
+                </div>
+            </div>
+            <!-- /tabs-->
+        </nav>
+        <!-- /Userbar -->
+
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+
+
+    <!--Modals-->
+    <!--Sign Out Dialog Modal-->
+    <div class="modal modal-danger-filled" id="signout" data-easein="bounceIn" data-easeout="bounceOut">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center padding-bottom-0">
+                    <i class="fa-5x dripicons-exit display-block"></i>
+                    <h5 class="margin-top-0">تمایل به خروج دارید؟</h5>
+                </div>
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-default" id="yesigo">بله</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">خیر</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!--Lock Screen Dialog Modal-->
+    <div class="modal modal-info-filled" id="lockscreen" data-easein="bounceIn" data-easeout="bounceOut">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center padding-bottom-0">
+                    <i class="fa-5x dripicons-lock display-block"></i>
+                    <h5 class="margin-top-0">صفحه قفل شود؟</h5>
+                </div>
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-default" id="yesilock">بله</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">خیر</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+
+    <!--Scripts-->
+    <!--Main - Used on every Administry page-->
+    <!--jQuery and jQuery UI-->
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/jquery/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/jquery/jquery-ui.min.js' %}"></script>
+    <!--BootStrap-->
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/bootstrap/bootstrap.min.js' %}"></script>
+    <!--Widgets-->
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/oakenwidgets/jquery.oakenwidgets.min.js' %}"></script>
+    <!--Metis Menu-->
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/metismenu/metisMenu.min.js' %}"></script>
+    <!--Sparkline Charts-->
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/sparkline/jquery.sparkline.min.js' %}"></script>
+    <!--Nicescroller-->
+    <!--Will be removed with next release <script type="text/javascript" src="js/vendors/nicescroll/jquery.nicescroll.min.js"></script> -->
+    <!--Modal Animation-->
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/bootstrap-modal-animation/animation.js' %}"></script>
+    <!--MomentJS-->
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/moment/moment.min.js' %}"></script>
+    <!--/Main - Used on every Administry page-->
+
+    <!--Secondary - used only on that page-->
+    <!--Vector Map-->
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/vmap/jquery.vmap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/vmap/jquery.vmap.sampledata.js' %}"></script>
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/vmap/jquery.vmap.world.js' %}"></script>
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/vmap/vmap-samples.js' %}"></script>
+
+    <!--FlotChart-->
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/flotchart/jquery.flot.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/flotchart/jquery.flot.resize.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/flotchart/jquery.flot-tooltip.js' %}"></script>
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/flotchart/flotchart-examples.js' %}"></script>
+
+    <!--Sparkline Charts-->
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/sparkline/sparklines-examples.js' %}"></script>
+    <!--/Scripts-->
+
+    <!--ChartJS-->
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/chartjs/Chart.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'tafahom/js/vendors/chartjs/chartjs-examples.js' %}"></script>
+
+    <!--Main App-->
+    <script type="text/javascript" src="{% static 'tafahom/js/scripts.js' %}"></script>
+</body>
+
+
+<meta http-equiv="content-type" content="text/html;charset=windows-1251">
+
+</html>
