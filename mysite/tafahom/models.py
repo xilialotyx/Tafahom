@@ -11,6 +11,12 @@ class ReternType(models.Model):
 class Organization(models.Model):
     title = models.CharField(max_length=250)
 
+class ReternType(models.Model):
+    title = models.CharField(max_length=50)
+
+class ResType(models.Model):
+    title = models.CharField(max_length=250)
+
 class Miz(models.Model):
     code = models.CharField(max_length=50)
     title = models.CharField(max_length=250)
@@ -57,12 +63,40 @@ class Tafahom(models.Model):
         ),
     )
     organization_id = models.ForeignKey(
-        Organization, on_delete=models.CASCADE)
+        Organization, on_delete=models.DO_NOTHING)
     miz_id = models.ForeignKey(
-        Miz, on_delete=models.CASCADE)
+        Miz, on_delete=models.DO_NOTHING)
     law_id = models.ForeignKey(
-        Law, on_delete=models.CASCADE)
+        Law, on_delete=models.DO_NOTHING)
     retern_type_id = models.ForeignKey(
-        ReternType, on_delete=models.CASCADE)
+        ReternType, on_delete=models.DO_NOTHING)
     verifier_id = models.ForeignKey(
-        Verifier, on_delete=models.CASCADE)
+        Verifier, on_delete=models.DO_NOTHING)
+
+
+class Vaam(models.Model):
+    tafahom_id = models.ForeignKey(
+        Tafahom, on_delete=models.DO_NOTHING)
+    mail_num = models.CharField(max_length=50)
+    mail_date = models.CharField(max_length=10)
+    action_date = models.CharField(max_length=10)
+    code_meli = models.CharField(max_length=11)
+    mablagh = models.DecimalField(max_digits=12,decimal_places=0
+        ,help_text=_("مبلغ"))
+    modat = models.IntegerField(help_text=_("مدت"))
+    res_type_id = models.ForeignKey(
+        ResType, on_delete=models.DO_NOTHING)
+
+
+class ResPerTafahom(models.Model):
+    tafahom_id = models.ForeignKey(
+        Tafahom, on_delete=models.DO_NOTHING)
+    res_type_id = models.ForeignKey(
+        ResType, on_delete=models.DO_NOTHING)
+    mablagh = models.DecimalField(max_digits=18,decimal_places=0
+        ,help_text=_("مبلغ"))
+    
+
+class Setting(models.Model):
+    field_name = models.CharField(max_length=255)
+    values = models.CharField(max_length=255)
