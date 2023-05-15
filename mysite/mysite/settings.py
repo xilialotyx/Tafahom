@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'jalali_date',
     "users.apps.UsersConfig",
     "tafahom.apps.TafahomConfig"
 ]
@@ -56,6 +57,31 @@ GRAPHENE = {
     'MIDDLEWARE': [
         'graphql_jwt.middleware.JSONWebTokenMiddleware',
     ],
+}
+
+# default settings (optional)
+JALALI_DATE_DEFAULTS = {
+   'Strftime': {
+        'date': '%y/%m/%d',
+        'datetime': '%H:%M:%S _ %y/%m/%d',
+    },
+    'Static': {
+        'js': [
+            # loading datepicker
+            'admin/js/django_jalali.min.js',
+            # OR
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.core.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/calendar.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc-fa.js',
+            # 'admin/js/main.js',
+        ],
+        'css': {
+            'all': [
+                'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css',
+            ]
+        }
+    },
 }
 
 GRAPHQL_JWT = {
@@ -112,6 +138,23 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'mssql',
+#             'NAME': 'mydb',
+#             'USER': 'user@myserver',
+#             'PASSWORD': 'password',
+#             'HOST': 'myserver.database.windows.net',
+#             'PORT': '',
+
+#             'OPTIONS': {
+#                 'driver': 'ODBC Driver 17 for SQL Server',
+#             },
+#         },
+#     }
+
+    # set this to False if you want to turn off pyodbc's connection pooling
+DATABASE_CONNECTION_POOLING = False
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -136,6 +179,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = 'fa-ir'
+import locale
+locale.setlocale(locale.LC_ALL, "fa_IR.UTF-8")
 
 TIME_ZONE = 'Asia/Tehran'
 
