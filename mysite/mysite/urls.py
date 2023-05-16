@@ -25,7 +25,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
-    path('', include('tafahom.urls'))
+    path('tafahom/', include('tafahom.urls',)),
+    path('', include('account.urls',))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,

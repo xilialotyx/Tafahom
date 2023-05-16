@@ -14,7 +14,9 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+LOGIN_REDIRECT_URL = "account:home"
+LOGOUT_REDIRECT_URL = "account:login"
+LOGIN_URL = "account:login"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -37,20 +39,20 @@ CORS_ORIGIN_WHITELIST = (
 # Application definition
 
 INSTALLED_APPS = [
-    'graphene_django',
+    # 'graphene_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
+    # 'corsheaders',
     'jalali_date',
-    "users.apps.UsersConfig",
+    "account.apps.AccountConfig",
     "tafahom.apps.TafahomConfig"
 ]
 
-AUTH_USER_MODEL = "users.CustomUser"
+AUTH_USER_MODEL = "account.User"
 
 GRAPHENE = {
     'SCHEMA': 'mysite.schema.schema',
@@ -92,7 +94,7 @@ GRAPHQL_JWT = {
 }
 
 AUTHENTICATION_BACKENDS = [
-    'graphql_jwt.backends.JSONWebTokenBackend',
+    # 'graphql_jwt.backends.JSONWebTokenBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -194,7 +196,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = Path.joinpath(BASE_DIR,'static')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path.joinpath(BASE_DIR , 'media') 
 # Default primary key field type

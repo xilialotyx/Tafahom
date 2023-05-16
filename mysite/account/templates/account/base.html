@@ -1,0 +1,50 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+
+<meta http-equiv="content-type" content="text/html;charset=windows-1251">
+
+<head>
+
+   <title>تفاهم نامه ها :. {% block title %}{% endblock %}</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="keywords" content="admin template, admin dashboard, inbox template, calendar template, form validation">
+   <meta name="author" content="DazeinCreative">
+   <meta name="description" content="Administry - Massive Admin Dashboard Template">
+   <link rel="shortcut icon" href="{% static 'account/images/logo-xs.png' %}" type="image/png">
+   <link href="{% static 'account/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+   <link href="{% static 'account/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+   <link href="{% static 'account/css/dripicons.min.css' %}" rel="stylesheet" type="text/css">
+   <link href="{% static 'account/css/animate/animate.css' %}" rel="stylesheet" type="text/css">
+   <link href="{% static 'account/css/hover/hover-min.css' %}" rel="stylesheet" type="text/css">
+   {% block basehead_css %}{% endblock basehead_css %}
+   <link href="{% static 'account/css/styles.css' %}" rel="stylesheet" type="text/css">
+   <link rel="stylesheet" href="{% static 'account/css/btr.css' %}" type="text/css">
+</head>
+
+<body>
+   
+   {% block basecontent %}
+
+   {% endblock %}
+   <!--Scripts-->
+   <!--JQuery-->
+   <script type="text/javascript" src="{% static 'account/js/vendors/jquery/jquery.min.js' %}"></script>
+   <script type="text/javascript" src="{% static 'account/js/vendors/jquery/jquery-ui.min.js' %}"></script>
+   <!--Parsley-->
+   <script type="text/javascript" src="{% static 'account/js/vendors/parsley/parsley-config.js' %}"></script>
+   <script type="text/javascript" src="{% static 'account/js/vendors/parsley/parsley.min.js' %}"></script>
+   {% block basescript %}
+   
+   {% endblock basescript %}
+   <!--Main App-->
+   <script type="text/javascript" src="{% static 'account/js/scripts.js' %}"></script>
+   <!--/Scripts-->
+</body>
+
+
+<meta http-equiv="content-type" content="text/html;charset=windows-1251">
+
+</html>
