@@ -74,31 +74,30 @@ class Verifier(models.Model):
 class Tafahom(models.Model):
     num = models.CharField(max_length=50, verbose_name="شماره")
     createDate = models.DateField(verbose_name="تاریخ صدور")
-    expirDate = models.DateField(verbose_name="تاریخ ابطال")
-    loanRow = models.CharField(max_length=10, verbose_name="ردیف وام")
-    des = models.TextField(verbose_name="توضیحات")
-    hesab = models.CharField(max_length=50, verbose_name="حساب")
-    code_kanun = models.BigIntegerField(verbose_name="کد کانون")
-    mablagh_limit = models.DecimalField(
+    expirDate = models.DateField(blank=True, null=True,verbose_name="تاریخ ابطال")
+    loanRow = models.CharField(blank=True, null=True,max_length=10, verbose_name="ردیف وام")
+    des = models.TextField(blank=True, null=True,verbose_name="توضیحات")
+    hesab = models.CharField(blank=True, null=True,max_length=50, verbose_name="حساب")
+    code_kanun = models.BigIntegerField(blank=True, null=True,verbose_name="کد کانون")
+    mablagh_limit = models.DecimalField(blank=True, null=True,
         max_digits=18, decimal_places=0, verbose_name="سقف مبلغ وام")
-    modat_limit = models.IntegerField(verbose_name="سقف مدت وام")
-    person_limit = models.IntegerField(verbose_name="سقف نفرات")
+    modat_limit = models.IntegerField(blank=True, null=True,verbose_name="سقف مدت وام")
+    person_limit = models.IntegerField(blank=True, null=True,verbose_name="سقف نفرات")
     is_blocked = models.BooleanField(
         default=False,        verbose_name="حساب مسدود است؟")
     is_bime = models.BooleanField(
         default=False,        verbose_name="دارای بیمه؟")
     by_sign = models.BooleanField(
         default=False,        verbose_name="ارسال برای امضا؟")
-    organization_id = models.ForeignKey(
-        Organization, on_delete=models.DO_NOTHING, verbose_name=" سازمان")
-    miz_id = models.ForeignKey(
-        Miz, on_delete=models.DO_NOTHING, verbose_name="میز کار")
-    law_id = models.ForeignKey(
-        Law, on_delete=models.DO_NOTHING, verbose_name="قانون")
-    retern_type_id = models.ForeignKey(
-        ReternType, on_delete=models.DO_NOTHING, verbose_name="نحوه باز پرداخت")
-    verifier_id = models.ForeignKey(
-        Verifier, on_delete=models.DO_NOTHING, verbose_name="تائید کننده")
+    organization_id = models.ForeignKey(Organization, on_delete=models.DO_NOTHING, verbose_name=" سازمان")
+    miz_id = models.ForeignKey(blank=True, null=True,
+        to=Miz, on_delete=models.DO_NOTHING, verbose_name="میز کار")
+    law_id = models.ForeignKey(blank=True, null=True,
+        to=Law, on_delete=models.DO_NOTHING, verbose_name="قانون")
+    retern_type_id = models.ForeignKey(blank=True, null=True,
+        to=ReternType, on_delete=models.DO_NOTHING, verbose_name="نحوه باز پرداخت")
+    verifier_id = models.ForeignKey(blank=True, null=True,
+        to=Verifier, on_delete=models.DO_NOTHING, verbose_name="تائید کننده")
 
     class Meta:
         verbose_name = "تفاهم نامه"
@@ -111,16 +110,16 @@ class Tafahom(models.Model):
 class Vaam(models.Model):
     tafahom_id = models.ForeignKey(
         Tafahom, on_delete=models.DO_NOTHING, verbose_name="تفاهم نامه")
-    mail_num = models.CharField(
+    mail_num = models.CharField(blank=True, null=True,
         max_length=50, verbose_name="شماره نامه")
-    mail_date = models.DateField(verbose_name="تاریخ نامه")
-    action_date = models.DateField(verbose_name="تاریخ شروع")
-    code_meli = models.CharField(max_length=11, verbose_name="کد ملی")
+    mail_date = models.DateField(blank=True, null=True,verbose_name="تاریخ نامه")
+    action_date = models.DateField(blank=True, null=True,verbose_name="تاریخ شروع")
+    code_meli = models.CharField(blank=True, null=True,max_length=11, verbose_name="کد ملی")
     mablagh = models.DecimalField(max_digits=12, decimal_places=0, help_text=_(
         "مبلغ"), verbose_name="مبلغ")
-    modat = models.IntegerField(help_text=_("مدت"), verbose_name="مدت")
-    res_type_id = models.ForeignKey(
-        ResType, on_delete=models.DO_NOTHING, verbose_name="نوع منبع")
+    modat = models.IntegerField(blank=True, null=True,help_text=_("مدت"), verbose_name="مدت")
+    res_type_id = models.ForeignKey(blank=True, null=True,
+        to=ResType, on_delete=models.DO_NOTHING, verbose_name="نوع منبع")
 
     class Meta:
         verbose_name = "وام"
@@ -147,9 +146,8 @@ class ResPerTafahom(models.Model):
 
 
 class Setting(models.Model):
-    field_name = models.CharField(
-        max_length=255, verbose_name="نام متغیر")
-    values = models.CharField(max_length=255, verbose_name="مقدار")
+    field_name = models.CharField(max_length=255, verbose_name="نام متغیر")
+    values = models.CharField(blank=True, null=True,max_length=255, verbose_name="مقدار")
 
     class Meta:
         verbose_name = "آپشن"

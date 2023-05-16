@@ -15,31 +15,20 @@ class VaamAdmin(admin.ModelAdmin):
     pass
 
 
-class VaamAdminTabularInline(TabularInlineJalaliMixin, admin.TabularInline):
-	model = Vaam
-
-        
-
 @admin.action(description='مسدود کردن حساب')
-def price_to_zero(modeladmin, request, queryset):
+def hesab_is_blocked(modeladmin, request, queryset):
     for a in queryset:
         a.is_blocked = True
         a.save()
 
 
 @admin.register(Tafahom)
-class TafahomAdmin(ModelAdminJalaliMixin,admin.ModelAdmin):
+class TafahomAdmin(admin.ModelAdmin):
     # show jalali date in list display 
-	list_display = ['num', 'get_created_jalali']
-	inlines = (VaamAdminTabularInline, )
-	actions = [price_to_zero]
+	list_display = ['num']
+	# inlines = (VaamAdminTabularInline, )
+	actions = [hesab_is_blocked]
 	
-	@admin.display(description='تاریخ ایجاد', ordering='createDate')
-	def get_created_jalali(self, obj):
-		return datetime2jalali(obj.createDate).strftime('%a, %d %b %Y %H:%M:%S')
-
-    
-
 
 
 @admin.register(ReternType)
