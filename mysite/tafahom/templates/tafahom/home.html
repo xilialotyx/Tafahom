@@ -37,7 +37,7 @@
           <tbody>
             {% for obj in object_list %}
             <tr>
-              <td>{{obj}}</td>
+              <td><a href="{% url 'tafahom:detai' obj.pk %}">{{ obj }}</a></td>
               <td>{{obj.createDate}}</td>
               <td>{{obj.expirDate}}</td>
               <td>{{obj.loanRow}}</td>

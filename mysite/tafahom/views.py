@@ -18,9 +18,6 @@ class TafahomListView(generic.ListView):
     #   context['some_data'] = 'This is just some data'
     #   return context
 
-class TafahomListView(generic.DetailView):
+class TafahomDetailView(generic.DetailView):
     model=Tafahom  
-    template_name = 'tafahom/home.html'  # Specify your own template name/location
-
-    def get_queryset(self,pk):
-        return Tafahom.objects.filter(pk=pk) 
+    template_name = 'tafahom/detai.html'
