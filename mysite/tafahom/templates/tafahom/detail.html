@@ -1,0 +1,85 @@
+{% extends 'account/layout.html' %}
+{% load jalali_tags %}
+ {% load static %} 
+ {% block title %}{{object}}{% endblock %} 
+
+{% block content %}
+<div class="col-md-12">
+  <!--Panel-->
+  <div class="panel panel-default" id="validation2">
+    <div class="panel-heading">
+      <div class="panel-title">عنوان<small>توضیحات</small></div>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        
+          <div class="col-md-6">
+            <div class="form-group has-feedback">
+              <label class="control-label" for="{{tafahom.nom.id_for_label}}">شماره تفاهم نامه</label>
+              <input
+                type="text"
+                disabled
+                class="form-control"
+                id="{{tafahom.num.id_for_label}}"
+                placeholder="{{tafahom.num}}"/>
+    
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label" for="{{tafahom.createDate.id_for_label}}">تاریخ ایجاد</label>
+              <input
+                type="text"
+                disabled
+                class="form-control"
+                id="{{tafahom.createDate.id_for_label}}"
+                placeholder="{{tafahom.createDate}}"/>
+    
+            </div>
+          </div>
+          <form id="demo-extras" data-parsley-validate>
+          <div class="col-md-12">
+            {% csrf_token %}
+  {{ form.as_p }}
+            <button type="submit" class="btn btn-lg btn-primary">
+              اعتبار سنجی
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--/Panel Body-->
+  </div>
+  <!--/Panel-->
+</div>
+<hr>
+
+<h2>Vaam Entries</h2>
+
+<p>Total Mablagh: {{ total_mablagh }}</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>شماره نامه</th>
+      <th>تاریخ نامه</th>
+      <th>تاریخ شروع</th>
+      <th>کد ملی</th>
+      <th>مبلغ</th>
+      <th>مدت</th>
+      <th>نوع منبع</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for vaam in vaams %}
+    <tr>
+      <td>{{ vaam.mail_num }}</td>
+      <td>{{ vaam.mail_date }}</td>
+      <td>{{ vaam.action_date }}</td>
+      <td>{{ vaam.code_meli }}</td>
+      <td>{{ vaam.mablagh }}</td>
+      <td>{{ vaam.modat }}</td>
+      <td>{{ vaam.res_type_id }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

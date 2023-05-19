@@ -4,3 +4,4 @@ graphene_django==3.0.2
 django-cors-headers==4.0.0
 mssql-django==1.2
 django-jalali-date==1.0.2
+pandas==2.0.1

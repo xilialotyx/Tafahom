@@ -1,6 +1,9 @@
-{% extends 'account/layout.html' %} {% load static %} 
-{% block title %} لیست
-تفاهم نامه ها {% endblock%} 
+{% extends 'account/layout.html' %} 
+{% load static %} 
+{% block title %}
+لیست
+تفاهم نامه ها 
+{% endblock%} 
 {% block head_css %}
 <link
   href="{% static 'account/css/datatables/dataTables.bootstrap.css' %}  "
@@ -22,8 +25,6 @@
         <div class="panel-title">تفاهم نامه ها<small>لیست </small></div>
       </div>
       <div class="panel-body">
-
-        {% if object_list %}
         <table id="tafahom-table" class="table table-striped">
           <thead>
             <tr>
@@ -37,20 +38,17 @@
           <tbody>
             {% for obj in object_list %}
             <tr>
-              <td><a href="{% url 'tafahom:detai' obj.pk %}">{{ obj }}</a></td>
+              <td><a href="{% url 'tafahom:detail' obj.pk %}">{{ obj }}</a></td>
               <td>{{obj.createDate}}</td>
               <td>{{obj.expirDate}}</td>
               <td>{{obj.loanRow}}</td>
               <td>{{obj.hesab}}</td>
             </tr>
+            {% empty %}
+            <p>موردی یافت نشد!</p>
             {% endfor %}
-
           </tbody>
         </table>
-        {% else %}
-          <p>موردی یافت نشد!</p>
-        {% endif %}
-        
       </div>
       <!--/Panel Body-->
     </div>
@@ -58,14 +56,12 @@
   </div>
 </div>
 
-
 {% endblock content %} 
-
 {% block script %}
 <script>
   $(document).ready(function () {
     $("#tafahom-table").DataTable({
-        order: [[3, 'desc']],
+      order: [[3, "desc"]],
     });
   });
 </script>

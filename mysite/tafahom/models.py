@@ -40,8 +40,8 @@ class ResType(models.Model):
     title = models.CharField(max_length=250, verbose_name="عنوان")
 
     class Meta:
-        verbose_name = "منبع وام"
-        verbose_name_plural = "منابع وام"
+        verbose_name = "نوع منبع وام"
+        verbose_name_plural = "نوع منابع وام"
 
     def __str__(self):
         return self.title
@@ -115,11 +115,14 @@ class Vaam(models.Model):
     mail_date = models.DateField(blank=True, null=True,verbose_name="تاریخ نامه")
     action_date = models.DateField(blank=True, null=True,verbose_name="تاریخ شروع")
     code_meli = models.CharField(blank=True, null=True,max_length=11, verbose_name="کد ملی")
-    mablagh = models.DecimalField(max_digits=12, decimal_places=0, help_text=_(
-        "مبلغ"), verbose_name="مبلغ")
+    mablagh = models.DecimalField(max_digits=12, decimal_places=0, verbose_name="مبلغ")
     modat = models.IntegerField(blank=True, null=True,help_text=_("مدت"), verbose_name="مدت")
     res_type_id = models.ForeignKey(blank=True, null=True,
         to=ResType, on_delete=models.DO_NOTHING, verbose_name="نوع منبع")
+    is_duplicate=models.BooleanField(default=False,verbose_name="تکراری؟")
+    is_variz=models.BooleanField(default=False,verbose_name="واریز شده؟")
+    des = models.TextField(blank=True, null=True,verbose_name="توضیحات")
+
 
     class Meta:
         verbose_name = "وام"
@@ -138,20 +141,10 @@ class ResPerTafahom(models.Model):
         "مبلغ"), verbose_name="مبلغ")
 
     class Meta:
+        unique_together = ('tafahom_id', 'res_type_id',)
         verbose_name = "منبع هر تفاهم نامه"
         verbose_name_plural = "منابع تفاهم نامه ها"
 
     def __str__(self):
         return "{} {}".format(self.tafahom_id, self.res_type_id)
 
-
-class Setting(models.Model):
-    field_name = models.CharField(max_length=255, verbose_name="نام متغیر")
-    values = models.CharField(blank=True, null=True,max_length=255, verbose_name="مقدار")
-
-    class Meta:
-        verbose_name = "آپشن"
-        verbose_name_plural = "تنظیمات"
-
-    def __str__(self):
-        return self.field_name

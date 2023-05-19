@@ -1,75 +1,88 @@
 
-from django.forms import ModelForm
-from .models import Law, Tafahom, ReternType, Organization, ResType, Verifier, Miz, Vaam, Setting, ResPerTafahom
+from django import forms
+from .models import Law, Tafahom, ReternType, Organization, ResType, Verifier, Miz, Vaam, ResPerTafahom
+from jalali_date.fields import JalaliDateField, SplitJalaliDateTimeField
+from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 
 
-class LawForm(ModelForm):
+class LawForm(forms.ModelForm):
 
     class Meta:
         model = Law
         fields = ["title"]
 
 
-class ReternTypeForm(ModelForm):
+class ReternTypeForm(forms.ModelForm):
 
     class Meta:
         model = ReternType
         fields = ["title"]
 
 
-class OrganizationForm(ModelForm):
+class OrganizationForm(forms.ModelForm):
 
     class Meta:
         model = Organization
         fields = ["title"]
 
 
-class ResTypeForm(ModelForm):
+class ResTypeForm(forms.ModelForm):
 
     class Meta:
         model = ResType
         fields = ["title"]
 
 
-class MizForm(ModelForm):
+class MizForm(forms.ModelForm):
 
     class Meta:
         model = Miz
         fields = ["code", "title"]
 
 
-class VerifierForm(ModelForm):
+class VerifierForm(forms.ModelForm):
 
     class Meta:
         model = Verifier
         fields = ["user_code", "title"]
 
 
-class TafahomForm(ModelForm):
+class TafahomForm(forms.ModelForm):
 
     class Meta:
         model = Tafahom
         fields = ["num", "createDate", "expirDate", "loanRow", "des", "hesab",
                   "code_kanun", "mablagh_limit", "modat_limit", "person_limit", "is_blocked", "is_bime"]
+        
 
 
-class VaamForm(ModelForm):
+class VaamForm(forms.ModelForm):
 
     class Meta:
         model = Vaam
         fields = ["tafahom_id", "mail_num", "mail_date",
                   "action_date", "code_meli", "mablagh", "res_type_id"]
+        
+    def __init__(self, *args, **kwargs):
+        super(VaamForm, self).__init__(*args, **kwargs)
+        self.fields['action_date'] = JalaliDateField(label=('تاریخ اعمال'), # date format is  "yyyy-mm-dd"
+            widget=AdminJalaliDateWidget # optional, to use default datepicker
+        )
+        
+
+class VaamInTafahomForm(forms.ModelForm):
+    excel_file = forms.FileField()
+
+    class Meta:
+        model = Vaam
+        fields = ['excel_file']
 
 
-class ResPerTafahomForm(ModelForm):
+class ResPerTafahomForm(forms.ModelForm):
 
     class Meta:
         model = ResPerTafahom
         fields = ["tafahom_id", "res_type_id", "mablagh"]
 
 
-class SettingForm(ModelForm):
 
-    class Meta:
-        model = Setting
-        fields = ["field_name", "values"]

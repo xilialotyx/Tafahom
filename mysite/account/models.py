@@ -11,7 +11,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=150,null=True,verbose_name="نام و نام خانوادگی")
     is_staff = models.BooleanField(default=False,verbose_name="کاربر مسئول")
     is_active = models.BooleanField(default=True,verbose_name="فعال/غیرفعال")
-    date_joined = models.DateTimeField(auto_now_add=True,verbose_name="تاریخ ایجاد")
+    date_joined = models.DateField(auto_now_add=True,verbose_name="تاریخ ایجاد")
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []
@@ -37,3 +37,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
+    
+
+
+class Setting(models.Model):
+    field_name = models.CharField(max_length=255, verbose_name="نام متغیر")
+    values = models.CharField(blank=True, null=True,max_length=255, verbose_name="مقدار")
+
+    class Meta:
+        verbose_name = "آپشن"
+        verbose_name_plural = "تنظیمات"
+
+    def __str__(self):
+        return self.field_name
