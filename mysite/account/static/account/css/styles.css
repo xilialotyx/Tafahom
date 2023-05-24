@@ -148,6 +148,78 @@
   src: url(../fonts/iran.woff), url(../fonts/iran.woff2);
 }
 
+@font-face {
+  font-family: Vazirmatn FD;
+  src: url('../fonts/Vazirmatn-FD-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn FD;
+  src: url('../fonts/Vazirmatn-FD-ExtraLight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn FD;
+  src: url('../fonts/Vazirmatn-FD-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn FD;
+  src: url('../fonts/Vazirmatn-FD-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn FD;
+  src: url('../fonts/Vazirmatn-FD-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn FD;
+  src: url('../fonts/Vazirmatn-FD-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn FD;
+  src: url('../fonts/Vazirmatn-FD-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn FD;
+  src: url('../fonts/Vazirmatn-FD-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn FD;
+  src: url('../fonts/Vazirmatn-FD-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400, 700);
 @import url(https://fonts.googleapis.com/css?family=Roboto:300, 400, 700, 900);
 body {
@@ -156,8 +228,8 @@ body {
   color: #30353e;
   width: 100%;
   margin: 0;
-  font-family: iran, 'Roboto', sans-serif;
-  font-weight: 400;
+  font-family: 'Vazirmatn FD',iran, 'Roboto', sans-serif;
+  font-weight: 500;
   /*Google Fonts Rendering in Webkit */
   -webkit-animation-delay: 0.1s;
   -webkit-animation-name: fontfix;
@@ -211,7 +283,8 @@ ul.timeline-comments li.timeline-comment:last-child a,
 .breadcrumb,
 .progress-bar,
 .circle-nums {
-  font-family: iran, 'Montserrat', sans-serif;
+  font-family: 'Vazirmatn FD',iran, 'Montserrat', sans-serif;
+  font-weight: 500;
 }
 
 @-webkit-keyframes fontfix {
@@ -3319,12 +3392,13 @@ form legend {
 .form-control {
   height: 42px;
   padding: 9px 12px;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.42857143;
   color: #30353e;
   background-color: #dee1e6;
   border: 0;
   border-radius: 4px;
+  text-align:center;
 }
 
 .form-control:focus {

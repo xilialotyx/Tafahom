@@ -60,8 +60,8 @@ class VaamForm(forms.ModelForm):
 
     class Meta:
         model = Vaam
-        fields = ["tafahom_id", "mail_num", "mail_date",
-                  "action_date", "code_meli", "mablagh", "res_type_id"]
+        fields = ["tafahom", "mail_num", "mail_date",
+                  "action_date", "code_meli", "mablagh", "res_type"]
         
     def __init__(self, *args, **kwargs):
         super(VaamForm, self).__init__(*args, **kwargs)
@@ -82,7 +82,7 @@ class ResPerTafahomForm(forms.ModelForm):
 
     class Meta:
         model = ResPerTafahom
-        fields = ["tafahom_id", "res_type_id", "mablagh"]
+        fields = ["tafahom", "res_type", "mablagh"]
 
 
 

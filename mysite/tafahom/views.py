@@ -11,11 +11,13 @@ from jalali_date import datetime2jalali, date2jalali
 
 
 class TafahomListView(ListView):
-    model=Tafahom  
+    model=Tafahom
     template_name = 'tafahom/list.html'  # Specify your own template name/location
 
     def get_queryset(self):
-        return Tafahom.objects.all() # Get 5 books containing the title war
+        tafahom_list = Tafahom.objects.all()
+
+        return  tafahom_list
 
     # def get_context_data(self, **kwargs):
     #   # Call the base implementation first to get the context
@@ -26,9 +28,9 @@ class TafahomListView(ListView):
 
 def tafahom_details(request, tafahom_id):
     tafahom = get_object_or_404(Tafahom, pk=tafahom_id)
-    vaams = Vaam.objects.filter(tafahom_id=tafahom_id)
-    tafahom.createDate=date2jalali(tafahom.createDate)
+    vaams = Vaam.objects.filter(tafahom=tafahom_id)
     total_mablagh = vaams.aggregate(Sum('mablagh'))['mablagh__sum']
+    totals_PRT = vaams.values('res_type__title').annotate(total_mablagh=Sum('mablagh'))
 
     if request.method == 'POST':
         form = VaamForm(request.POST, request.FILES)
@@ -38,7 +40,7 @@ def tafahom_details(request, tafahom_id):
 
             for index, row in df.iterrows():
                 code_meli = row['code_meli']
-                tafahom_id = row['tafahom_id']
+                tafahom = row['tafahom']
                 vaam, created = Vaam.objects.get_or_create(code_meli=code_meli, tafahom_id=tafahom_id)
                 
                 vaam = Vaam()
@@ -47,19 +49,19 @@ def tafahom_details(request, tafahom_id):
                     vaam.is_duplicate=True
                     vaam.des += "-قبلا در این تفاهم نامه وام دریافت شده"
                 
-                vaam.tafahom_id = tafahom
+                vaam.tafahom = tafahom
                 vaam.mail_num = row['شماره نامه']
                 vaam.mail_date = row['تاریخ نامه']
                 vaam.action_date = row['تاریخ شروع']
                 vaam.code_meli = row['کد ملی']
                 vaam.mablagh = row['مبلغ']
                 vaam.modat = row['مدت']
-                vaam.res_type_id = row['نوع منبع']
+                vaam.res_type = row['نوع منبع']
                 vaam.save()
                 
 
             # پس از ذخیره کردن اطلاعات، می‌توانید به صفحه اطلاعات redirect کنید
-            return redirect('tafahom_details', tafahom_id=tafahom_id)
+            return redirect('tafahom_details', tafahom=tafahom_id)
     else:
         form = VaamForm()
 
@@ -68,6 +70,7 @@ def tafahom_details(request, tafahom_id):
         'form': form,
         'vaams': vaams,
         'total_mablagh': total_mablagh,
+        'total_prt': totals_PRT,
     }
 
     return render(request, 'tafahom/detail.html', context)

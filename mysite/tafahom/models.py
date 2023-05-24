@@ -1,6 +1,7 @@
 from django.db import models
-
+import datetime 
 from django.utils.translation import gettext_lazy as _
+from jalali_date import datetime2jalali, date2jalali
 
 
 class Law(models.Model):
@@ -89,14 +90,14 @@ class Tafahom(models.Model):
         default=False,        verbose_name="دارای بیمه؟")
     by_sign = models.BooleanField(
         default=False,        verbose_name="ارسال برای امضا؟")
-    organization_id = models.ForeignKey(Organization, on_delete=models.DO_NOTHING, verbose_name=" سازمان")
-    miz_id = models.ForeignKey(blank=True, null=True,
+    organization = models.ForeignKey(Organization, on_delete=models.DO_NOTHING, verbose_name=" سازمان")
+    miz = models.ForeignKey(blank=True, null=True,
         to=Miz, on_delete=models.DO_NOTHING, verbose_name="میز کار")
-    law_id = models.ForeignKey(blank=True, null=True,
+    law = models.ForeignKey(blank=True, null=True,
         to=Law, on_delete=models.DO_NOTHING, verbose_name="قانون")
-    retern_type_id = models.ForeignKey(blank=True, null=True,
+    retern_type = models.ForeignKey(blank=True, null=True,
         to=ReternType, on_delete=models.DO_NOTHING, verbose_name="نحوه باز پرداخت")
-    verifier_id = models.ForeignKey(blank=True, null=True,
+    verifier = models.ForeignKey(blank=True, null=True,
         to=Verifier, on_delete=models.DO_NOTHING, verbose_name="تائید کننده")
 
     class Meta:
@@ -104,11 +105,20 @@ class Tafahom(models.Model):
         verbose_name_plural = "تفاهم نامه ها"
 
     def __str__(self):
-        return "{} {}".format(self.organization_id.title, self.num)
+        return "{} {}".format(self.organization.title, self.num)
+    
+    
+    def JcreateDate(self):
+        return date2jalali(self.createDate)
+    JcreateDate.short_description="تاریخ صدور"
+
+    def is_expiered(self):
+        return datetime.date.today() > self.expirDate
+    is_expiered.Boolean = True
 
 
 class Vaam(models.Model):
-    tafahom_id = models.ForeignKey(
+    tafahom = models.ForeignKey(
         Tafahom, on_delete=models.DO_NOTHING, verbose_name="تفاهم نامه")
     mail_num = models.CharField(blank=True, null=True,
         max_length=50, verbose_name="شماره نامه")
@@ -117,7 +127,7 @@ class Vaam(models.Model):
     code_meli = models.CharField(blank=True, null=True,max_length=11, verbose_name="کد ملی")
     mablagh = models.DecimalField(max_digits=12, decimal_places=0, verbose_name="مبلغ")
     modat = models.IntegerField(blank=True, null=True,help_text=_("مدت"), verbose_name="مدت")
-    res_type_id = models.ForeignKey(blank=True, null=True,
+    res_type = models.ForeignKey(blank=True, null=True,
         to=ResType, on_delete=models.DO_NOTHING, verbose_name="نوع منبع")
     is_duplicate=models.BooleanField(default=False,verbose_name="تکراری؟")
     is_variz=models.BooleanField(default=False,verbose_name="واریز شده؟")
@@ -133,18 +143,18 @@ class Vaam(models.Model):
 
 
 class ResPerTafahom(models.Model):
-    tafahom_id = models.ForeignKey(
+    tafahom = models.ForeignKey(
         Tafahom, on_delete=models.DO_NOTHING, verbose_name="تفاهم نامه")
-    res_type_id = models.ForeignKey(
+    res_type = models.ForeignKey(
         ResType, on_delete=models.DO_NOTHING, verbose_name="نوع منبع")
     mablagh = models.DecimalField(max_digits=18, decimal_places=0, help_text=_(
         "مبلغ"), verbose_name="مبلغ")
 
     class Meta:
-        unique_together = ('tafahom_id', 'res_type_id',)
+        unique_together = ('tafahom', 'res_type',)
         verbose_name = "منبع هر تفاهم نامه"
         verbose_name_plural = "منابع تفاهم نامه ها"
 
     def __str__(self):
-        return "{} {}".format(self.tafahom_id, self.res_type_id)
+        return "{} {}".format(self.tafahom, self.res_type)
 

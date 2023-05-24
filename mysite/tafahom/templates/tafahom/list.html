@@ -1,4 +1,5 @@
 {% extends 'account/layout.html' %} 
+{% load jalali_tags %}
 {% load static %} 
 {% block title %}
 لیست
@@ -39,8 +40,8 @@
             {% for obj in object_list %}
             <tr>
               <td><a href="{% url 'tafahom:detail' obj.pk %}">{{ obj }}</a></td>
-              <td>{{obj.createDate}}</td>
-              <td>{{obj.expirDate}}</td>
+              <td>{{obj.JcreateDate}}</td>
+              <td>{{obj.JexpirDate}}</td>
               <td>{{obj.loanRow}}</td>
               <td>{{obj.hesab}}</td>
             </tr>
