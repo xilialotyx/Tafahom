@@ -1,7 +1,8 @@
 {% extends 'account/layout.html' %}
 {% load humanize %}
+{% load mathfilters %}
 {% load jalali_tags %}
- {% load static %} 
+ {% load static  %} 
  {% block title %}جزئیات تفاهم نامه{% endblock %} 
 
 {% block content %}
@@ -15,19 +16,19 @@
       <div class="row">
         
           <div class="col-md-2">
-            <div class="form-group has-feedback">
+            <div class="form-group">
               <label class="control-label" >شماره تفاهم نامه</label>
               <input type="text" disabled class="form-control" value="{{tafahom.num}}"/>
             </div>
           </div>
           <div class="col-md-2">
-            <div class="form-group has-feedback">
+            <div class="form-group">
               <label class="control-label" >تاریخ ایجاد</label>
-              <input type="text" disabled class="form-control" value="{{tafahom.JcreateDate}}"/>
+              <input type="text" disabled class="form-control" value="{{tafahom.createDate|to_jalali:'%Y/%m/%d'}}"/>
             </div>
           </div>
           <div class="col-md-2">
-            <div class="form-group {% if tafahom.is_expiered %}has-error{% endif %} has-feedback">
+            <div class="form-group {% if tafahom.is_expiered %}has-error {% else %} has-success{% endif %}  has-feedback">
               <label class="control-label" >تاریخ انقضاء</label>
               <input type="text" disabled class="form-control" value="{{tafahom.expirDate|to_jalali:'%Y/%m/%d'}}"/>
               {% if tafahom.is_expiered %}
@@ -35,23 +36,28 @@
               {% else  %}
               <span class="glyphicon glyphicon-ok form-control-feedback"></span>
               {% endif %}
+              {% if tafahom.is_expiered %}
+                <span class="help-block">{{ tafahom.expirDate|timesince }} گذشته</span>
+              {% else  %}
+                <span class="help-block">{{ tafahom.expirDate|timeuntil }} مانده</span>
+              {% endif %}
               
             </div>
           </div>
           <div class="col-md-2">
-            <div class="form-group has-feedback">
+            <div class="form-group">
               <label class="control-label" >ردیف وام</label>
               <input type="text" disabled class="form-control" value="{{tafahom.loanRow}}"/>
             </div>
           </div>
           <div class="col-md-2">
-            <div class="form-group has-feedback">
+            <div class="form-group">
               <label class="control-label" >شماره حساب</label>
               <input type="text" disabled class="form-control" value="{{tafahom.hesab}}"/>
             </div>
           </div>
           <div class="col-md-2">
-            <div class="form-group has-feedback">
+            <div class="form-group">
               <label class="control-label" >کد کانون</label>
               <input type="text" disabled class="form-control" value="{{tafahom.code_kanun}}"/>
             </div>
@@ -60,107 +66,208 @@
       <div class="row">
         
         <div class="col-md-2">
-          <div class="form-group has-feedback">
+          <div class="form-group">
             <label class="control-label" >سقف مبلغ</label>
             <input type="text" disabled class="form-control" value="{{tafahom.mablagh_limit}}"/>
           </div>
         </div>
         <div class="col-md-2">
-          <div class="form-group has-feedback">
+          <div class="form-group">
             <label class="control-label" >سقف مدت</label>
             <input type="text" disabled class="form-control" value="{{tafahom.modat_limit}}"/>
           </div>
         </div>
-        <div class="col-md-2">
-          <div class="form-group has-feedback">
-            <label class="control-label" >سقف نفرات</label>
-            <input type="text" disabled class="form-control" value="{{tafahom.person_limit}}"/>
-          </div>
-        </div>
+        
         <div class="col-md-1">
-          <div class="form-group has-feedback">
+          <div class="form-group">
             <label class="control-label" >مسدود؟</label>
             <input type="checkbox" {% if tafahom.is_blocked %}checked{% endif %} disabled class="form-control" value="{{tafahom.is_blocked}}"/>
           </div>
         </div>
         <div class="col-md-1">
-          <div class="form-group has-feedback">
+          <div class="form-group">
             <label class="control-label" >بیمه؟</label>
             <input type="checkbox" {% if tafahom.is_bime %}checked{% endif %} disabled class="form-control" value="{{tafahom.is_bime}}"/>
           </div>
         </div>
         <div class="col-md-1">
-          <div class="form-group has-feedback">
+          <div class="form-group">
             <label class="control-label" >ارسال امضا؟</label>
             <input type="checkbox" {% if tafahom.by_sign %}checked{% endif %} disabled class="form-control" value="{{tafahom.by_sign}}"/>
           </div>
         </div>
         <div class="col-md-1">
-          <div class="form-group has-feedback">
+          <div class="form-group">
             <label class="control-label" >نوع وام</label>
             <input type="text" disabled class="form-control" value="{{tafahom.retern_type}}"/>
           </div>
         </div>
         <div class="col-md-2">
-          <div class="form-group has-feedback">
+          <div class="form-group">
             <label class="control-label" >تائید کننده</label>
             <input type="text" disabled class="form-control" value="{{tafahom.verifier}}"/>
           </div>
         </div>
     </div>
+    <div class="row">
+        
+      <div class="col-md-2">
+        <div class="form-group">
+          <label class="control-label" >جمع مبالغ تخصیص</label>
+          <input type="text" disabled class="form-control" value="{{tafahom.total_res|intcomma:False}}"/>
+        </div>
+      </div>
+      {% for mprtt in res_type %}
+      <div class="col-md-2">
+        <div class="form-group">
+          <label class="control-label" >{{mprtt.res_type}} </label>
+          <input type="text" disabled class="form-control" value="{{mprtt.mablagh|intcomma:False}}"/>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="col-md-2">
+        <div class="form-group">
+          <label class="control-label" >سقف نفرات</label>
+          <input type="text" disabled class="form-control" value="{{tafahom.person_limit}}"/>
+        </div>
+      </div>
+  </div>
       <div class="row">
         
         <div class="col-md-2">
-          <div class="form-group has-feedback">
-            <label class="control-label" >جمع مبالغ واریزی</label>
-            <input type="text" disabled class="form-control" value="{{total_mablagh|intcomma:False}}"/>
+          <div class="form-group">
+            <label class="control-label" >جمع مبالغ پرداختی</label>
+            <input type="text" disabled class="form-control" value="{{tafahom.total_vaam|intcomma:False}}"/>
           </div>
         </div>
-        {% for mprt in total_prt %}
+        {% for mprt in tafahom.totals_vaam_PRT %}
         <div class="col-md-2">
-          <div class="form-group has-feedback">
+          <div class="form-group">
             <label class="control-label" >{{mprt.res_type__title}} </label>
             <input type="text" disabled class="form-control" value="{{mprt.total_mablagh|intcomma:False}}"/>
           </div>
         </div>
         {% endfor %}
-        
+        <div class="col-md-2">
+          <div class="form-group">
+            <label class="control-label" >جمع نفرات پرداخت شده</label>
+            <input type="text" disabled class="form-control" value="{{vaams.count}}"/>
+          </div>
+        </div>
     </div>
+    
+  <div class="row">
+        
+    <div class="col-md-2">
+      <div class="form-group {% if total_res_type|sub:total_vaam <= 0 %}has-error {% else %} has-success{% endif %}  has-feedback">
+        <label class="control-label" > مانده تخصیص</label>
+        <input type="text" disabled class="form-control" value="{{ tafahom.remain_res |intcomma:False}}"/>
+        {% if total_res_type|sub:total_vaam <= 0 %}
+          <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        {% else  %}
+          <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+        {% endif %}
+      </div>
+    </div>
+    {% for mprt in tafahom.totals_vaam_PRT %}
+    {% for mprtt in res_type %}
+    {% if mprt.res_type__title == mprtt.res_type.title %}
+    <div class="col-md-2">
+      <div class="form-group {% if mprtt.mablagh|sub:mprt.total_mablagh <= 0 %}has-error {% else %} has-success{% endif %}  has-feedback">
+        <label class="control-label" >{{mprt.res_type__title}} </label>
+        <input type="text" disabled class="form-control" value="{{mprtt.mablagh|sub:mprt.total_mablagh |intcomma:False}}"/>
+        {% if mprtt.mablagh|sub:mprt.total_mablagh <= 0 %}
+          <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        {% else  %}
+          <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+    {% if tafahom.person_limit > 0 %}
+    <div class="col-md-2">
+      <div class="form-group {% if tafahom.person_limit|sub:vaams.count <= 0 %}has-error {% else %} has-success{% endif %}  has-feedback">
+        <label class="control-label" >مانده نفرات</label>
+        <input type="text" disabled class="form-control" value="{{tafahom.person_limit|sub:vaams.count}}"/>
+        {% if tafahom.person_limit|sub:vaams.count <= 0 %}
+          <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        {% else  %}
+          <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+</div>
+<div class="col-md-6 ui-sortable">
+
+<div class="form-group">
+  <label class="col-md-3 control-label" for="filebutton-normal">ارسال فایل</label>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="hidden" name="tafahom_id" value="{{tafahom.id}}" />
+     <div class="input-group">
+        <span class="input-group-btn">
+           <span class="btn btn-default btn-file">
+              جستجو <input id="excel_file" name="excel_file" type="file" multiple="">
+           </span>
+        </span>
+        <input type="text" class="form-control" readonly="">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-default">ارسال</button>
+        </span>
+     </div>
+    </form>
+
+</div>
+
+
+</div>
+<div class="col-md-12 ui-sortable">
+
+  <h4>لیست تسهلات</h4>
+  
+  <div class="table-responsive">
+      <table class="table table-hover table-striped">
+          <thead>
+              <tr>
+                  <th>#</th>
+                  <th>شماره <small>نامه</small></th>
+                  <th>تاریخ <small>نامه</small></th>
+                  <th>تاریخ واریز</th>
+                  <th>کد ملی</th>
+                  <th>مبلغ</th>
+                  <th>مدت</th>
+                  <th>نوع منبع</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for vaam in vaams %}
+              {% comment %} {% with  lmablagh=tafahom.mablagh_limit|default:0 > 0 and vaam.mablagh > tafahom.mablagh_limit|default:0 lmodat=(tafahom.modat_limit|default:0 > 0 and vaam.modat > tafahom.modat_limit|default:0) %} {% endcomment %}
+                <tr  class="{% if tafahom.mablagh_limit != none and vaam.mablagh > tafahom.mablagh_limit or tafahom.modat_limit and vaam.modat > tafahom.modat_limit %}warning{% endif %}">
+                  <td>{{forloop.counter}}</td>
+                  <td>{{ vaam.mail_num }}</td>
+                  <td>{{ vaam.mail_date|to_jalali:'%Y/%m/%d' }}</td>
+                  <td>{{ vaam.action_date|to_jalali:'%Y/%m/%d' }}</td>
+                  <td>{{ vaam.code_meli }}</td>
+                  <td>{% if tafahom.mablagh_limit and vaam.mablagh > tafahom.mablagh_limit %}<span class="label label-danger"> {{ vaam.mablagh|intcomma:False }} </span>{% else %}{{ vaam.mablagh|intcomma:False }}{% endif %}</td>
+                  <td>{% if tafahom.modat_limit and vaam.modat > tafahom.modat_limit %}<span class="label label-danger"> {{ vaam.modat }} </span>{% else %}{{ vaam.modat }}{% endif %}</td>
+                  <td>{{ vaam.res_type }}</td>
+                </tr>
+                {% comment %} {% endwith  %} {% endcomment %}
+            {% endfor %}
+          </tbody>
+      </table>
+  </div>
+</div>
     </div>
     <!--/Panel Body-->
   </div>
   <!--/Panel-->
+
+  
 </div>
-<hr>
 
-<h2>Vaam Entries</h2>
 
-<p>Total Mablagh: {{ total_mablagh }}</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>شماره نامه</th>
-      <th>تاریخ نامه</th>
-      <th>تاریخ شروع</th>
-      <th>کد ملی</th>
-      <th>مبلغ</th>
-      <th>مدت</th>
-      <th>نوع منبع</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for vaam in vaams %}
-    <tr>
-      <td>{{ vaam.mail_num }}</td>
-      <td>{{ vaam.mail_date }}</td>
-      <td>{{ vaam.action_date }}</td>
-      <td>{{ vaam.code_meli }}</td>
-      <td>{{ vaam.mablagh }}</td>
-      <td>{{ vaam.modat }}</td>
-      <td>{{ vaam.res_type }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
 {% endblock content %}

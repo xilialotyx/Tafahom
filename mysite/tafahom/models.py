@@ -2,7 +2,7 @@ from django.db import models
 import datetime 
 from django.utils.translation import gettext_lazy as _
 from jalali_date import datetime2jalali, date2jalali
-
+from django.db.models import Sum
 
 class Law(models.Model):
     title = models.CharField(max_length=150, verbose_name="عنوان")
@@ -115,6 +115,29 @@ class Tafahom(models.Model):
     def is_expiered(self):
         return datetime.date.today() > self.expirDate
     is_expiered.Boolean = True
+
+    def total_res(self):
+        res_type = ResPerTafahom.objects.filter(tafahom=self.id)
+        total_res = res_type.aggregate(Sum('mablagh'))['mablagh__sum']
+        return total_res
+    
+    def total_vaam(self):
+        vaams = Vaam.objects.filter(tafahom=self.id)
+        total_vaam = vaams.aggregate(Sum('mablagh'))['mablagh__sum']
+        return total_vaam
+    
+    def remain_res(self):
+        return self.total_res() - self.total_vaam()
+    
+    def totals_res_PRT(self):
+        res_type = ResPerTafahom.objects.filter(tafahom=self.id)
+        totals_vaam_PRT = res_type.values("res_type__title").annotate(total_mablagh=Sum('mablagh'))
+        return totals_vaam_PRT
+
+    def totals_vaam_PRT(self):
+        vaams = Vaam.objects.filter(tafahom=self.id)
+        totals_vaam_PRT = vaams.values("res_type__title").annotate(total_mablagh=Sum('mablagh'))
+        return totals_vaam_PRT
 
 
 class Vaam(models.Model):

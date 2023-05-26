@@ -1418,9 +1418,9 @@ button.close {
 
 .label,
 .badge {
-  font-size: 11px;
-  font-weight: 900;
+  font-size: inherit;
   border-radius: 5px;
+  vertical-align: inherit;
 }
 
 .label-round {
@@ -3606,7 +3606,7 @@ fieldset[disabled] .has-success .form-control,
 .has-success .form-control[disabled] {
   border-color: #bcd185;
   background: #bcd185;
-  color: #9ab946;
+  color: #408f87;
 }
 
 .has-success .form-control:focus {

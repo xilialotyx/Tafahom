@@ -1,10 +1,11 @@
-{% extends 'account/base.html' %} {% load static %} {% block basehead_css %}
-<link
-  href="{% static 'account/css/overlay-effects/overlay-effects.css' %}"
-  rel="stylesheet"
-  type="text/css"
-/>
-{% block head_css %} {% endblock head_css %} {% endblock basehead_css %} 
+{% extends 'account/base.html' %} 
+{% load static %} 
+{% block basehead_css %}
+
+
+
+{% endblock basehead_css %} 
+{% block head_css %} {% endblock head_css %} 
 {% block basecontent %}
 
 <div class="wrapper">
@@ -775,41 +776,6 @@
 
 {% block basescript %}
 
-<!--Scripts-->
-<!--Main - Used on every Administry page-->
-<!--BootStrap-->
-<script
-  type="text/javascript"
-  src="{% static 'account/js/vendors/bootstrap/bootstrap.min.js' %}"
-></script>
-<!--Widgets-->
-<script
-  type="text/javascript"
-  src="{% static 'account/js/vendors/oakenwidgets/jquery.oakenwidgets.min.js' %}"
-></script>
-<!--Metis Menu-->
-<script
-  type="text/javascript"
-  src="{% static 'account/js/vendors/metismenu/metisMenu.min.js' %}"
-></script>
-<!--Sparkline Charts-->
-<script
-  type="text/javascript"
-  src="{% static 'account/js/vendors/sparkline/jquery.sparkline.min.js' %}"
-></script>
-<!--Nicescroller-->
-<!--Will be removed with next release <script type="text/javascript" src="js/vendors/nicescroll/jquery.nicescroll.min.js"></script> -->
-<!--Modal Animation-->
-<script
-  type="text/javascript"
-  src="{% static 'account/js/vendors/bootstrap-modal-animation/animation.js' %}"
-></script>
-<!--MomentJS-->
-<script
-  type="text/javascript"
-  src="{% static 'account/js/vendors/moment/moment.min.js' %}"
-></script>
-<!--/Main - Used on every Administry page-->
 
  {% endblock basescript %}
  {% block script %} {% endblock script %}

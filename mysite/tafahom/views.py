@@ -1,12 +1,13 @@
 from django.utils import timezone
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from .models import Tafahom, Vaam
-from django.db.models import Sum
-import pandas as pd
+from .models import Tafahom, Vaam,ResPerTafahom
 from django.shortcuts import render,redirect,get_object_or_404
 from .forms import VaamForm
 from jalali_date import datetime2jalali, date2jalali
+from django.contrib.sessions.backends.db import SessionStore
+import openpyxl
+from openpyxl.styles import PatternFill
 
 
 
@@ -29,36 +30,58 @@ class TafahomListView(ListView):
 def tafahom_details(request, tafahom_id):
     tafahom = get_object_or_404(Tafahom, pk=tafahom_id)
     vaams = Vaam.objects.filter(tafahom=tafahom_id)
-    total_mablagh = vaams.aggregate(Sum('mablagh'))['mablagh__sum']
-    totals_PRT = vaams.values('res_type__title').annotate(total_mablagh=Sum('mablagh'))
+    res_type = ResPerTafahom.objects.filter(tafahom=tafahom_id)
 
     if request.method == 'POST':
-        form = VaamForm(request.POST, request.FILES)
+        excel_file = request.FILES['excel_file']
         if form.is_valid():
             excel_file = request.FILES['excel_file']
-            df = pd.read_excel(excel_file)
+            # بارگیری فایل اکسل
+            wb = openpyxl.load_workbook(excel_file)
+            # انتخاب ورک‌شیت
+            ws = wb['Sheet1']
+
+            # تغییر رنگ سلول A1 به زرد
+            yellow_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+            ws['A1'].fill = yellow_fill
+
+            # ذخیره فایل اکسل تغییر یافته
+            wb.save('path/to/your/modified_file.xlsx')
+
+            for row in ws["A1:C1"]:
+                for cell in row:
+                    cell.fill = yellow_fill
+
+            for row in ws.iter_rows('A{}:C{}'.format(ws.min_row+1,ws.max_row)):
+                for cell in row:
+                    cell.value
 
             for index, row in df.iterrows():
-                code_meli = row['code_meli']
-                tafahom = row['tafahom']
-                vaam, created = Vaam.objects.get_or_create(code_meli=code_meli, tafahom_id=tafahom_id)
+                code_meli = row['کد ملی']
+                tafahom_id = request.POST["tafahom_id"]
+                vaam = Vaam.objects.get(code_meli=code_meli, tafahom=tafahom_id)
                 
-                vaam = Vaam()
-                if created:
-                    # ردیف تازه ایجاد شده است
+                if vaam is None:
+                    # این کد ملی داخل این تفاهم نامه وام دریافت نکرده است
                     vaam.is_duplicate=True
                     vaam.des += "-قبلا در این تفاهم نامه وام دریافت شده"
+                    vaam.tafahom = tafahom
+                    vaam.mail_num = row['شماره نامه']
+                    vaam.mail_date = row['تاریخ نامه']
+                    vaam.action_date = row['تاریخ شروع']
+                    vaam.code_meli = row['کد ملی']
+                    vaam.mablagh = row['مبلغ']
+                    vaam.modat = row['مدت']
+                    vaam.res_type = row['نوع منبع']
+                    vaam.save()
+
+                else:
+                    sfd
                 
-                vaam.tafahom = tafahom
-                vaam.mail_num = row['شماره نامه']
-                vaam.mail_date = row['تاریخ نامه']
-                vaam.action_date = row['تاریخ شروع']
-                vaam.code_meli = row['کد ملی']
-                vaam.mablagh = row['مبلغ']
-                vaam.modat = row['مدت']
-                vaam.res_type = row['نوع منبع']
-                vaam.save()
-                
+
+                session = SessionStore()
+                session['my_dataframe'] = df
+                session.save()
 
             # پس از ذخیره کردن اطلاعات، می‌توانید به صفحه اطلاعات redirect کنید
             return redirect('tafahom_details', tafahom=tafahom_id)
@@ -69,8 +92,7 @@ def tafahom_details(request, tafahom_id):
         'tafahom': tafahom,
         'form': form,
         'vaams': vaams,
-        'total_mablagh': total_mablagh,
-        'total_prt': totals_PRT,
+        'res_type':res_type,
     }
 
     return render(request, 'tafahom/detail.html', context)
