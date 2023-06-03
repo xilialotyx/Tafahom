@@ -113,12 +113,15 @@ class Tafahom(models.Model):
     JcreateDate.short_description="تاریخ صدور"
 
     def is_expiered(self):
-        return datetime.date.today() > self.expirDate
+        if self.expirDate is not None:
+            return datetime.date.today() > self.expirDate
+        return True
     is_expiered.Boolean = True
 
     def total_res(self):
         res_type = ResPerTafahom.objects.filter(tafahom=self.id)
         total_res = res_type.aggregate(Sum('mablagh'))['mablagh__sum']
+
         return total_res
     
     def total_vaam(self):
