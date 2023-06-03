@@ -19,6 +19,19 @@
 {% endblock head_css %} 
 {% block content %}
 <div class="row">
+  <form method="GET" >
+    {% csrf_token %}
+    <fieldset>
+      <div class="col-md-6">
+        <div class="form-group">
+          <input  id="search_tafahom"  name="search_tafahom"    placeholder="جستجو نام یا شماره تفاهم نامه" class="form-control" type="text" />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success">جستجو</button>
+    </fieldset>
+</form>
+</div>
+<div class="row">
   <div class="col-md-12">
     <!--Panel-->
     <div class="panel panel-default" id="tabledb1">

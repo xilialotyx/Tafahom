@@ -1,5 +1,6 @@
 !function () {
    "use strict";
+   $.noConflict();
    $(document).ready(function () {
       function e(e) {
          $(e.target).prev(".panel-heading").find("i.indicator").toggleClass("fa-chevron-up fa-chevron-down")

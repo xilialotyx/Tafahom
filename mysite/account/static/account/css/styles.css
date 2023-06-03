@@ -3390,13 +3390,9 @@ form legend {
 }
 
 .form-control {
-  height: 42px;
-  padding: 9px 12px;
   font-size: 20px;
-  line-height: 1.42857143;
   color: #30353e;
   background-color: #dee1e6;
-  border: 0;
   border-radius: 4px;
   text-align:center;
 }
@@ -3410,7 +3406,7 @@ form legend {
   font-size: 1.4em;
   color: #9099aa;
   height: 42px;
-  line-height: 42px;
+  line-height: 36px;
 }
 
 .help-block {
@@ -3427,7 +3423,7 @@ form legend {
 }
 
 .input-group-btn > .btn {
-  height: 42px;
+  height: 34px;
 }
 
 .input-group-btn > .btn + .btn {
@@ -3444,6 +3440,7 @@ form legend {
 .input-group-btn:first-child > .btn,
 .input-group-btn:first-child > .btn-group {
   margin-left: 0;
+  padding-top: 6px;
 }
 
 .input-group-addon {
@@ -4886,6 +4883,9 @@ html,
 
 .panel .panel-body {
   padding: 20px 25px;
+  border: #68686845 solid;
+  border-width: 0px 2px 2px 2px;
+  border-radius: 0px 0px 7px 7px;
 }
 
 .panel .panel-body + .table,
