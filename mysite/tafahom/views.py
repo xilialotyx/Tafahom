@@ -1,6 +1,6 @@
 from django.utils import timezone
 from django.views.generic.list import ListView
-from .models import Tafahom, Vaam,ResPerTafahom
+from .models import Tafahom, Vaam,ResPerTafahom,Organization
 from django.shortcuts import render,redirect,get_object_or_404
 from .forms import VaamForm
 from jalali_date import datetime2jalali, date2jalali
@@ -12,6 +12,7 @@ from openpyxl.styles import PatternFill
 from django.templatetags.static import static
 from django.urls import reverse
 from pathlib import Path
+from django.db.models import Q
 
 
 
@@ -21,6 +22,13 @@ class TafahomListView(ListView):
 
     def get_queryset(self):
         tafahom_list = Tafahom.objects.all()
+        search_param = self.request.GET.get('search_tafahom')
+
+        if search_param:
+            organization_obj = Organization.objects.filter(title__icontains=search_param)
+            query = Q(num__icontains=search_param) | Q(organization__in=organization_obj)
+            tafahom_list = Tafahom.objects.filter(query)
+
 
         return  tafahom_list
 

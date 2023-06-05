@@ -1,6 +1,77 @@
-{% extends 'account/layout.html' %}
-{% block title %} صفحه اصلی {% endblock%}
+{% extends 'account/layout.html' %} 
+{% block title %} صفحه اصلی {% endblock%} 
 {% block content %}
 
-
+<div class="row oakenwidgets">
+  <div class="col-md-12 ui-sortable">
+    <div class="panel panel-default with-border">
+      <div class="panel-heading ui-sortable-handle">
+        <div class="panel-title">ایجاد فایل قالب<small>تسهیلات فناپ</small></div>
+      </div>
+      <div class="panel-body">
+        <form action=""
+        method="POST"
+        enctype="multipart/form-data"          >
+        {% csrf_token %}
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">دکمه رادیویی رنگی</label>
+                    <div class="col-md-12 ui-sortable">
+                       <div class="radio-styled radio-primary radio-inline">
+                          <input name="radios-normal-styled-2" id="radios-00" value="1" checked="checked" type="radio">
+                          <label for="radios-00">دکمه پیشفرض</label>
+                       </div>
+                       <div class="radio-styled radio-success radio-inline">
+                          <input name="radios-normal-styled-2" id="radios-11" value="2" type="radio">
+                          <label for="radios-11">دکمه قبول</label>
+                       </div>
+                       <div class="radio-styled radio-info radio-inline">
+                          <input name="radios-normal-styled-2" id="radios-22" value="3" type="radio">
+                          <label for="radios-22">دکمه اطلاع</label>
+                       </div>
+                       <div class="radio-styled radio-warning radio-inline">
+                          <input name="radios-normal-styled-2" id="radios-33" value="4" type="radio">
+                          <label for="radios-33">دکمه هشدار</label>
+                       </div>
+                       <div class="radio-styled radio-danger radio-inline">
+                          <input name="radios-normal-styled-2" id="radios-44" value="5" type="radio">
+                          <label for="radios-44">دکمه خطر</label>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-md-4">
+                    <div class="form-group">
+                      <label class=" control-label" for="filebutton-normal">ارسال فایل</label>
+                      <span>شامل ستون های</span>[
+                      <span>شماره مشتری</span>,
+                      <span>مبلغ</span>,
+                      <span>مدت</span>,
+                      <span>توضیحات</span>]
+                      <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-default btn-file">
+                              جستجو <input id="excel_file"
+                              name="excel_file" type="file" >
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" readonly="">
+                      </div>
+    
+                    </div>
+                   </div>
+                   <div class="col-md-6">
+                    <div class="form-group">
+                      <label class=" control-label" for="filebutton-normal"></label>
+                      <div class="input-group">
+                   <button type="submit" class="btn btn-success">ارسال</button>
+                  </div></div></div>
+                  </div>
+            </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--col-md-4-->
+</div>
 {% endblock %}

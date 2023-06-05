@@ -1,4 +1,4 @@
-from django.contrib.auth import views
+from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
@@ -6,11 +6,10 @@ from .views import home
 
 
 app_name = "account"
-newlogginView = views.LoginView
-newlogginView.template_name = 'account/registration/login.html'
+
 urlpatterns = [
-    path("login/", newlogginView.as_view(), name="login"),
-    path("logout/", views.LogoutView.as_view(), name="logout"),
+    path("login/", auth_views.LoginView.as_view(template_name='account/registration/login.html'), name="login"),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     # path("password_change/", views.PasswordChangeView.as_view(), name="password_change"    ),
     # path("password_change/done/",views.PasswordChangeDoneView.as_view(),name="password_change_done",    ),
     # path("password_reset/", views.PasswordResetView.as_view(), name="password_reset"),

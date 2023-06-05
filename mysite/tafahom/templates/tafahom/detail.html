@@ -3,7 +3,7 @@
 {% block title %}جزئیات تفاهم نامه{%endblock %} 
 
 {% block content %}
-<div class="col-md-12">
+<div class="col-md-12 ">
   <!--Panel-->
   <div class="panel panel-default" id="validation2">
     <div class="panel-heading">
@@ -36,9 +36,7 @@
           </div>
         </div>
         <div class="col-md-2">
-          <div
-            class="form-group {% if tafahom.is_expiered %}has-error {% else %} has-success{% endif %} has-feedback"
-          >
+          <div class="form-group {% if tafahom.expirDate and tafahom.is_expiered %}has-error {% else %} has-success{% endif %} has-feedback" >
             <label class="control-label">تاریخ انقضاء</label>
             <input
               type="text"
@@ -46,20 +44,17 @@
               class="form-control"
               value="{{tafahom.expirDate|to_jalali:'%Y/%m/%d'}}"
             />
-            {% if tafahom.is_expiered %}
-            <span
-              class="glyphicon glyphicon-remove form-control-feedback"
-            ></span>
+            {% if tafahom.expirDate and tafahom.is_expiered %}
+              <span class="glyphicon glyphicon-remove form-control-feedback" ></span>
             {% else %}
-            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-            {% endif %} {% if tafahom.is_expiered %}
-            <span class="help-block"
-              >{{ tafahom.expirDate|timesince }} گذشته</span
-            >
-            {% else %}
-            <span class="help-block"
-              >{{ tafahom.expirDate|timeuntil }} مانده</span
-            >
+              <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+            {% endif %}
+            {% if tafahom.expirDate %}
+              {% if tafahom.is_expiered %}
+                <span class="help-block">{{ tafahom.expirDate|timesince }} گذشته</span>
+              {% else %}
+                <span class="help-block">{{ tafahom.expirDate|timeuntil }} مانده</span>
+              {% endif %}
             {% endif %}
           </div>
         </div>
@@ -70,7 +65,7 @@
               type="text"
               disabled
               class="form-control"
-              value="{{tafahom.loanRow}}"
+              value="{{tafahom.loanRow|default_if_none:'ندارد'}}"
             />
           </div>
         </div>
@@ -81,7 +76,7 @@
               type="text"
               disabled
               class="form-control"
-              value="{{tafahom.hesab}}"
+              value="{{tafahom.hesab|default_if_none:'ندارد'}}"
             />
           </div>
         </div>
@@ -92,7 +87,7 @@
               type="text"
               disabled
               class="form-control"
-              value="{{tafahom.code_kanun}}"
+              value="{{tafahom.code_kanun|default_if_none:'ندارد'}}"
             />
           </div>
         </div>
@@ -105,7 +100,7 @@
               type="text"
               disabled
               class="form-control"
-              value="{{tafahom.mablagh_limit}}"
+              value="{{tafahom.mablagh_limit|intcomma:False|default_if_none:'ندارد'}}"
             />
           </div>
         </div>
@@ -116,7 +111,7 @@
               type="text"
               disabled
               class="form-control"
-              value="{{tafahom.modat_limit}}"
+              value="{{tafahom.modat_limit|default_if_none:'ندارد'}}"
             />
           </div>
         </div>
@@ -179,7 +174,7 @@
               type="text"
               disabled
               class="form-control"
-              value="{{tafahom.retern_type}}"
+              value="{{tafahom.retern_type|default_if_none:'ندارد'}}"
             />
           </div>
         </div>
@@ -190,7 +185,7 @@
               type="text"
               disabled
               class="form-control"
-              value="{{tafahom.verifier}}"
+              value="{{tafahom.verifier|default_if_none:'ندارد'}}"
             />
           </div>
         </div>
@@ -227,7 +222,7 @@
               type="text"
               disabled
               class="form-control"
-              value="{{tafahom.person_limit}}"
+              value="{{tafahom.person_limit|default_if_none:'ندارد'}}"
             />
           </div>
         </div>
@@ -337,7 +332,8 @@
         </div>
         {% endif %}
       </div>
-      <div class="col-md-12 ui-sortable">
+      <div class="row oakenwidgets">
+      <div class="col-md-12 ui-sortable ">
         <div class="panel panel-info" id="forms2">
           <div class="panel-heading ui-sortable-handle">
             <div class="panel-title">استعلام <small>تسهیلات جدید</small> </div>
@@ -363,10 +359,14 @@
 
               </div> {% endcomment %}
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                 <div class="form-group">
                   <label class=" control-label" for="filebutton-normal">ارسال فایل</label>
-                  
+                  <span>شامل ستون های</span>[
+                  <span>کد ملی</span>,
+                  <span>مبلغ</span>,
+                  <span>مدت</span>,
+                  <span>توضیحات</span>]
                   <div class="input-group">
                     <span class="input-group-btn">
                         <span class="btn btn-default btn-file">
@@ -391,7 +391,16 @@
           {% if ws %}
           <div class="col-md-12 ui-sortable">
             <h4 style="float:right;">لیست تسهیلات جدید</h4>
-            <a class="btn btn-primary" style="float:left;" href="{% url 'tafahom:download_file' download_file_name %}" download>دانلود فایل</a>
+            <div class="pull-left">
+              <a class="btn btn-warning btn-circle-sm tooltiped" href="{% url 'tafahom:download_file' download_file_name %}" 
+               download 
+               data-toggle="tooltip" data-placement="top" title="" 
+              data-original-title="دانلود فایل اکسل موجود"><i class="fa fa-cloud-download"></i></a>
+
+              <a class="btn btn-info btn-circle-sm tooltiped" href="#"  
+              data-toggle="tooltip" data-placement="top" title="" 
+              data-original-title="دانلود فایل اکسل قالب"><i class="fa fa-download"></i></a>
+            </div>
             <div class="clearfix"></div>
             <div class="table-responsive">
               <table class="table table-hover table-striped">
@@ -432,6 +441,7 @@
         </div>
         </div>
       </div>
+    </div>
       <div class="col-md-12 ui-sortable">
         <h4>لیست تسهلات</h4>
 

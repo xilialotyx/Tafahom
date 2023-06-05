@@ -1,39 +1,23 @@
 <!-- Sidebar Wrapper-->
+
 <nav class="sidebar-wrapper navbar sidebar">
   <div class="sidebar-inner">
     <ul class="nav" id="side-menu">
-      <li class="active">
-        <a href="{% url 'account:home' %}"
-          ><i class="dripicons-home"></i><span class="li-text">پیشخوان</span></a
+      <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+        <a href="{% url 'account:home' %}"><i class="dripicons-home"></i><span class="li-text">پیشخوان</span></a
         >
       </li>
-      <li>
+      <li class="{% if request.resolver_match.app_name == 'tafahom' %}active{% endif %}">
         <a href="#"
           ><i class="dripicons-article"></i><span class="li-text">تفاهم نامه ها</span
             ><span class="fa arrow"></span
         ></a>
         <ul class="nav nav-second-level">
-          <li>
-            <a href="{% url 'tafahom:list' %} "><span class="li-text">لیست تفاهم نامه ها</span></a>
+          <li class="{% if request.resolver_match.url_name == 'list' %}active{% endif %}">
+            <a  href="{% url 'tafahom:list' %} "><span class="li-text">لیست تفاهم نامه ها</span></a>
           </li>
-          <li>
-            <a href="widgets-panels.html"
-              ><span class="li-text">پورتلت</span></a
-            >
-          </li>
-          <li>
-            <a href="widgets-vol-1.html"><span class="li-text">ابزارک</span></a>
-          </li>
-          <li>
-            <a href="widgets-vol-2.html"
-              ><span class="li-text">ابزارک 2</span></a
-            >
-          </li>
-          <li>
-            <a href="widgets-vol-3.html"
-              ><span class="li-text">ابزارک 3</span
-              ><span class="badge">جدید</span></a
-            >
+          <li class="{% if request.resolver_match.url_name == 'edit' %}active{% endif %}">
+            <a  href="{% url 'tafahom:edit' %} "><span class="li-text">ویرایش تفاهم نامه ها</span></a>
           </li>
         </ul>
       </li>

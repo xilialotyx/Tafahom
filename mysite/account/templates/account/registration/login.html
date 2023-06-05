@@ -1,7 +1,7 @@
 {% extends 'account/base.html' %} 
 {% load static %}
 {% block title %} ورود {% endblock%} 
-{% block content %}
+{% block basecontent %}
 <div class="standalone-page-wrapper image-background-1">
   <div class="center-wrapper">
     <div class="login-block">
@@ -24,10 +24,10 @@
             >ایمیل</label
           >
           <div class="col-md-9">
-            <input type="text" class="form-control" id="{{
-            form.username.id_for_label }}" placeholder="ایمیل" name="{{
-            form.username.html_name }}" value="{{
-            form.username.value|default_if_none:"" }}" required />
+            <input type="text" class="form-control" 
+            id="{{form.username.id_for_label }}" 
+            placeholder="نام کاربری" name="{{form.username.html_name }}" 
+            value="{{form.username.value|default_if_none:'' }}" required />
           </div>
         </div>
         <div class="form-group">
@@ -37,9 +37,10 @@
             >پسورد</label
           >
           <div class="col-md-9">
-            <input type="password" class="form-control" id="{{
-            form.password.id_for_label }}" value="{{
-            form.password.value|default_if_none:"" }}" placeholder="پسورد"
+            <input type="password" class="form-control" 
+            id="{{ form.password.id_for_label }}" 
+            value="{{ form.password.value|default_if_none:'' }}" 
+            placeholder="پسورد"
             required name="{{ form.password.html_name }}" />
           </div>
         </div>
@@ -59,7 +60,7 @@
       </form>
     </div>
     <div class="copyrights">
-      مدیریت قالب (بومی سازی و پشتیبانی) <br />علی یدالهی &copy; 2017
+      مدیریت قالب (بومی سازی و پشتیبانی) <br />علی پوراسماعیلی &copy; 2017
     </div>
   </div>
 </div>

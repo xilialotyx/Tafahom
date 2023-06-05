@@ -995,6 +995,13 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   border-top: 1px solid rgba(144, 153, 170, 0.6);
 }
 
+.sidebar ul.nav-second-level li.active a span:after {
+  font:normal normal normal 10px/1 FontAwesome;
+  content: '\f053';
+  color: #fff;
+  float: left;
+}
+
 .sidebar ul.nav-second-level li a {
   font-weight: 400;
   font-size: 0.95em;
@@ -3403,10 +3410,11 @@ form legend {
 }
 
 .form-control-feedback {
-  font-size: 1.4em;
+  font-size: 0.7em;
   color: #9099aa;
-  height: 42px;
-  line-height: 36px;
+  height: 21px;
+  width: 18px;
+  line-height: 21px;
 }
 
 .help-block {
@@ -3416,6 +3424,14 @@ form legend {
   margin-top: 3px;
   margin-bottom: 3px;
   color: #9099aa;
+}
+.has-feedback .form-control {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.has-feedback label ~ .form-control-feedback {
+  top: 40px;
 }
 
 .input-group-btn {

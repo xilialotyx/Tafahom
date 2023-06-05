@@ -20,18 +20,18 @@
 {% block content %}
 <div class="row">
   <form method="GET" >
-    {% csrf_token %}
+    
     <fieldset>
       <div class="col-md-6">
         <div class="form-group">
-          <input  id="search_tafahom"  name="search_tafahom"    placeholder="جستجو نام یا شماره تفاهم نامه" class="form-control" type="text" />
+          <input  id="search_tafahom"  name="search_tafahom" value="{{ request.GET.search_tafahom }}"   placeholder="جستجو نام یا شماره تفاهم نامه" class="form-control" type="text" />
         </div>
       </div>
       <button type="submit" class="btn btn-success">جستجو</button>
     </fieldset>
 </form>
 </div>
-<div class="row">
+<div class="row oakenwidgets">
   <div class="col-md-12">
     <!--Panel-->
     <div class="panel panel-default" id="tabledb1">
@@ -58,7 +58,7 @@
               <td rowspan="3"><a href="{% url 'tafahom:detail' obj.pk %}">{{ obj }}</a></td>
               <td rowspan="3">{{obj.createDate|to_jalali:'%Y/%m/%d'}}</td>
               <td rowspan="3">
-                {% if obj.is_expiered %}
+                {% if obj.expirDate and obj.is_expiered %}
                   <span class="label label-danger " > {{obj.expirDate|to_jalali:'%Y/%m/%d'}} </span>
                 {% else %}
                 <span class="label label-success " >{{obj.expirDate|to_jalali:'%Y/%m/%d'}}</span>
