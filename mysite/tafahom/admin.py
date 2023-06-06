@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Law, Tafahom, ReternType, Organization, ResType, Verifier, Miz, Vaam, ResPerTafahom
+from .models import Law, Tafahom, ReternType, Organization, ResType, Verifier, Miz,Instruction, Vaam, ResPerTafahom
 from jalali_date import datetime2jalali, date2jalali
 from jalali_date.admin import ModelAdminJalaliMixin, StackedInlineJalaliMixin, TabularInlineJalaliMixin	
 # Register your models here.
@@ -9,6 +9,12 @@ admin.site.site_header="مدیریت تفاهم نامه ها"
 @admin.register(Law)
 class LawAdmin(admin.ModelAdmin):
     list_display = ["title"]
+
+
+@admin.register(Instruction)
+class InstructionAdmin(admin.ModelAdmin):
+    pass
+
 
 @admin.register(Vaam)
 class VaamAdmin(admin.ModelAdmin):

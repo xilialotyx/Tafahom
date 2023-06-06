@@ -1,16 +1,12 @@
 from django.utils import timezone
 from django.views.generic.list import ListView
-from .models import Tafahom, Vaam,ResPerTafahom,Organization
-from django.shortcuts import render,redirect,get_object_or_404
-from .forms import VaamForm
+from .models import Tafahom, Vaam,ResPerTafahom,Organization,Instruction
+from django.shortcuts import render,get_object_or_404
 from jalali_date import datetime2jalali, date2jalali
-from django.contrib.sessions.backends.db import SessionStore
 from django.http import FileResponse
 import openpyxl
 from django.conf import settings
 from openpyxl.styles import PatternFill
-from django.templatetags.static import static
-from django.urls import reverse
 from pathlib import Path
 from django.db.models import Q
 
@@ -41,7 +37,8 @@ class TafahomListView(ListView):
 
 def tafahom_details(request, tafahom_id):
     tafahom = get_object_or_404(Tafahom, pk=tafahom_id)
-    vaams = Vaam.objects.filter(tafahom=tafahom_id)
+    instructions = Instruction.objects.filter(tafahom=tafahom_id)
+    vaams = Vaam.objects.filter(instruction__in=instructions)
     res_type = ResPerTafahom.objects.filter(tafahom=tafahom_id)
 
     if request.method == 'POST':
@@ -55,37 +52,38 @@ def tafahom_details(request, tafahom_id):
         yellow_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
         #ws['A1'].fill = yellow_fill
 
-        for row in ws["A1":"D1"]:
+        for row in ws["A1":"E1"]:
             for cell in row:
                 cell.fill = yellow_fill
 
         tafahom_id = request.POST["tafahom_id"]
+        inst = Instruction.objects.filter(tafahom=tafahom_id)
         data_ws = []
         for row in ws.iter_rows(min_row=2,max_row=ws.max_row):
             code_meli = row[0].value
-            vaam = Vaam.objects.filter(code_meli=code_meli, tafahom=tafahom_id).first()
+            vaam = Vaam.objects.filter(code_meli=code_meli, instruction__in=inst).first()
 
-            row[3].value=""
+            row[4].value=""
             if vaam is None:
-                if row[1].value > tafahom.mablagh_limit :
-                    row[3].value += "-مبلغ وام بیشتر از حد تفاهم نامه"         
+                if tafahom.mablagh_limit and row[2].value > tafahom.mablagh_limit :
+                    row[4].value += "-مبلغ وام بیشتر از حد تفاهم نامه"         
                 
-                if row[2].value > tafahom.modat_limit :
-                    row[3].value += "-مدت وام بیشتر از حد تفاهم نامه"
+                if tafahom.modat_limit and row[3].value > tafahom.modat_limit :
+                    row[4].value += "-مدت وام بیشتر از حد تفاهم نامه"
                 
             else:
                 # این کد ملی داخل این تفاهم نامه وام دریافت نکرده است
-                row[3].value += "-کد ملی تکراری"
-                if row[1].value > tafahom.mablagh_limit :
-                    row[3].value += "-مبلغ وام بیشتر از حد تفاهم نامه"         
+                row[4].value += "-کد ملی تکراری"
+                if tafahom.mablagh_limit and row[2].value > tafahom.mablagh_limit :
+                    row[4].value += "-مبلغ وام بیشتر از حد تفاهم نامه"         
                 
-                if row[2].value > tafahom.modat_limit :
-                    row[3].value += "-مدت وام بیشتر از حد تفاهم نامه"
+                if tafahom.modat_limit and row[3].value > tafahom.modat_limit :
+                    row[4].value += "-مدت وام بیشتر از حد تفاهم نامه"
 
-            data_ws.append([code_meli,row[1].value,row[2].value,row[3].value])
+            data_ws.append([code_meli,row[2].value,row[3].value,row[4].value])
 
         # ذخیره فایل اکسل تغییر یافته
-        file_name:str='{}-{}.xlsx'.format(tafahom_id,datetime2jalali(timezone.now()).strftime('%Y%m%d-%H%M%S'))
+        file_name:str='{}-{}.xlsx'.format(tafahom.num,datetime2jalali(timezone.now()).strftime('%Y%m%d-%H%M%S'))
         context = {
             'tafahom': tafahom,
             'res_type':res_type,

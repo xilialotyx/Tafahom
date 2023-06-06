@@ -100,7 +100,7 @@
               type="text"
               disabled
               class="form-control"
-              value="{{tafahom.mablagh_limit|intcomma:False|default_if_none:'ندارد'}}"
+              value="{{tafahom.mablagh_limit|default_if_none:'ندارد'|intcomma:False}}"
             />
           </div>
         </div>
@@ -364,6 +364,7 @@
                   <label class=" control-label" for="filebutton-normal">ارسال فایل</label>
                   <span>شامل ستون های</span>[
                   <span>کد ملی</span>,
+                  <span>شماره حساب</span>,
                   <span>مبلغ</span>,
                   <span>مدت</span>,
                   <span>توضیحات</span>]
@@ -408,6 +409,7 @@
                   <tr>
                     <th>#</th>
                     <th>کد ملی</th>
+                    <th>حساب</th>
                     <th>مبلغ</th>
                     <th>مدت</th>
                     <th>توضیحات</th>
@@ -419,17 +421,18 @@
                   <tr class="{% if vm.3 != "" %}warning{% endif %}" >
                     <td>{{forloop.counter}}</td>
                     <td>{{ vm.0 }}</td>
+                    <td>{{ vm.1 }}</td>
                     <td>
-                      {% if tafahom.mablagh_limit and vm.1 > tafahom.mablagh_limit %}
+                      {% if tafahom.mablagh_limit and vm.2 > tafahom.mablagh_limit %}
                       <span class="label label-danger">
-                        {{ vm.1|intcomma:False }} </span>{% else %}{{ vm.1|intcomma:False }}{% endif %}
+                        {{ vm.2|intcomma:False }} </span>{% else %}{{ vm.2|intcomma:False }}{% endif %}
                     </td>
                     <td>
-                      {% if tafahom.modat_limit and vm.2 > tafahom.modat_limit %}
-                      <span class="label label-danger"> {{ vm.2 }} </span>
-                      {% else %}{{ vm.2 }}{% endif %}
+                      {% if tafahom.modat_limit and vm.3 > tafahom.modat_limit %}
+                      <span class="label label-danger"> {{ vm.3 }} </span>
+                      {% else %}{{ vm.3 }}{% endif %}
                     </td>
-                    <td>{{vm.3}}</td>
+                    <td>{{vm.4}}</td>
                   </tr>
                   {% endfor %}
                   
@@ -469,9 +472,9 @@
                 class="{% if tafahom.mablagh_limit != none and vaam.mablagh > tafahom.mablagh_limit or tafahom.modat_limit and vaam.modat > tafahom.modat_limit %}warning{% endif %}"
               >
                 <td>{{forloop.counter}}</td>
-                <td>{{ vaam.mail_num }}</td>
-                <td>{{ vaam.mail_date|to_jalali:'%Y/%m/%d' }}</td>
-                <td>{{ vaam.action_date|to_jalali:'%Y/%m/%d' }}</td>
+                <td>{{ vaam.instruction.mail_num }}</td>
+                <td>{{ vaam.instruction.mail_date|to_jalali:'%Y/%m/%d' }}</td>
+                <td>{{ vaam.instruction.action_date|to_jalali:'%Y/%m/%d' }}</td>
                 <td>{{ vaam.code_meli }}</td>
                 <td>
                   {% if tafahom.mablagh_limit and vaam.mablagh > tafahom.mablagh_limit %}<span class="label label-danger">

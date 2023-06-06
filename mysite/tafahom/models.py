@@ -125,7 +125,8 @@ class Tafahom(models.Model):
         return total_res
     
     def total_vaam(self):
-        vaams = Vaam.objects.filter(tafahom=self.id)
+        instrac = Instruction.objects.filter(tafahom=self.id)
+        vaams = Vaam.objects.filter(instruction__in=instrac)
         total_vaam = vaams.aggregate(Sum('mablagh'))['mablagh__sum']
         return total_vaam
     
@@ -138,26 +139,51 @@ class Tafahom(models.Model):
         return totals_vaam_PRT
 
     def totals_vaam_PRT(self):
-        vaams = Vaam.objects.filter(tafahom=self.id)
+        instruct = Instruction.objects.filter(tafahom=self.id)
+        vaams = Vaam.objects.filter(instruction__in=instruct)
         totals_vaam_PRT = vaams.values("res_type__title").annotate(total_mablagh=Sum('mablagh'))
         return totals_vaam_PRT
 
 
-class Vaam(models.Model):
+class Instruction(models.Model):
     tafahom = models.ForeignKey(
         Tafahom, on_delete=models.DO_NOTHING, verbose_name="تفاهم نامه")
     mail_num = models.CharField(blank=True, null=True,
         max_length=50, verbose_name="شماره نامه")
     mail_date = models.DateField(blank=True, null=True,verbose_name="تاریخ نامه")
     action_date = models.DateField(blank=True, null=True,verbose_name="تاریخ شروع")
+    des = models.TextField(blank=True, null=True,verbose_name="توضیحات")
+
+    class Meta:
+        verbose_name = "دستورالعمل"
+        verbose_name_plural = "دستورالعمل ها"
+
+    def __str__(self):
+        return self.tafahom.num + ':' + self.mail_num
+    
+    def total_vaam(self):
+        instrac = Instruction.objects.filter(tafahom=self.tafahom.id)
+        vaams = Vaam.objects.filter(instruction__in=instrac)
+        total_vaam = vaams.aggregate(Sum('mablagh'))['mablagh__sum']
+        return total_vaam
+    
+    def totals_vaam_PRT(self):
+        vaams = Vaam.objects.filter(instruction=self.id)
+        totals_vaam_PRT = vaams.values("res_type__title").annotate(total_mablagh=Sum('mablagh'))
+        return totals_vaam_PRT
+
+
+class Vaam(models.Model):
+    instruction = models.ForeignKey(
+        Instruction, on_delete=models.DO_NOTHING, verbose_name="دستورالعمل")
     code_meli = models.CharField(blank=True, null=True,max_length=11, verbose_name="کد ملی")
+    hesab = models.CharField(blank=True, null=True,max_length=50, verbose_name="حساب")
     mablagh = models.DecimalField(max_digits=12, decimal_places=0, verbose_name="مبلغ")
     modat = models.IntegerField(blank=True, null=True,help_text=_("مدت"), verbose_name="مدت")
     res_type = models.ForeignKey(blank=True, null=True,
         to=ResType, on_delete=models.DO_NOTHING, verbose_name="نوع منبع")
-    is_duplicate=models.BooleanField(default=False,verbose_name="تکراری؟")
-    is_variz=models.BooleanField(default=False,verbose_name="واریز شده؟")
     des = models.TextField(blank=True, null=True,verbose_name="توضیحات")
+
 
 
     class Meta:
