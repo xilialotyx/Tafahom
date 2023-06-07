@@ -239,18 +239,24 @@
             />
           </div>
         </div>
-        {% for mprt in tafahom.totals_vaam_PRT %}
+        {% for mprtt in res_type %}
         <div class="col-md-2">
           <div class="form-group">
-            <label class="control-label">{{mprt.res_type__title}} </label>
+            <label class="control-label">{{mprtt.res_type}} </label>
+        {% for mprt in tafahom.totals_vaam_PRT %}
+        {% if mprtt.res_type.id == mprt.res_type__id %}
+        
             <input
               type="text"
               disabled
               class="form-control"
               value="{{mprt.total_mablagh|intcomma:False}}"
             />
-          </div>
-        </div>
+          
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
         {% endfor %}
         <div class="col-md-2">
           <div class="form-group">

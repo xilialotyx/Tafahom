@@ -43,6 +43,7 @@ class ResType(models.Model):
     class Meta:
         verbose_name = "نوع منبع وام"
         verbose_name_plural = "نوع منابع وام"
+        ordering = ['id']
 
     def __str__(self):
         return self.title
@@ -135,13 +136,13 @@ class Tafahom(models.Model):
     
     def totals_res_PRT(self):
         res_type = ResPerTafahom.objects.filter(tafahom=self.id)
-        totals_vaam_PRT = res_type.values("res_type__title").annotate(total_mablagh=Sum('mablagh'))
+        totals_vaam_PRT = res_type.values("res_type__id","res_type__title").annotate(total_mablagh=Sum('mablagh'))
         return totals_vaam_PRT
 
     def totals_vaam_PRT(self):
         instruct = Instruction.objects.filter(tafahom=self.id)
         vaams = Vaam.objects.filter(instruction__in=instruct)
-        totals_vaam_PRT = vaams.values("res_type__title").annotate(total_mablagh=Sum('mablagh'))
+        totals_vaam_PRT = vaams.values("res_type__id","res_type__title").annotate(total_mablagh=Sum('mablagh'))
         return totals_vaam_PRT
 
 
