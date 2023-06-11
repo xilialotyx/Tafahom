@@ -56,26 +56,6 @@ class TafahomForm(forms.ModelForm):
         
 
 
-class VaamForm(forms.ModelForm):
-
-    class Meta:
-        model = Vaam
-        fields = ["tafahom", "mail_num", "mail_date",
-                  "action_date", "code_meli", "mablagh", "res_type"]
-        
-    def __init__(self, *args, **kwargs):
-        super(VaamForm, self).__init__(*args, **kwargs)
-        self.fields['action_date'] = JalaliDateField(label=('تاریخ اعمال'), # date format is  "yyyy-mm-dd"
-            widget=AdminJalaliDateWidget # optional, to use default datepicker
-        )
-        
-
-class VaamInTafahomForm(forms.ModelForm):
-    excel_file = forms.FileField()
-
-    class Meta:
-        model = Vaam
-        fields = ['excel_file']
 
 
 class ResPerTafahomForm(forms.ModelForm):
