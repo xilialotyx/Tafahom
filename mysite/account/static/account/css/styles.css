@@ -3968,6 +3968,18 @@ fieldset[disabled] .has-warning .form-control,
   background-color: #226dad;
 }
 
+.radio-success input[type='radio'] + label:after {
+  background-color: #53ad22;
+}
+
+.radio-success input[type='radio']:checked + label:before {
+  border-color: #53ad22;
+}
+
+.radio-success input[type='radio']:checked + label:after {
+  background-color: #53ad22;
+}
+
 .radio-danger input[type='radio'] + label:after {
   background-color: #e74958;
 }
@@ -9612,6 +9624,10 @@ ul.refstats li .stats-block .numbers {
 
 .margin-0 {
   margin: 0;
+}
+
+.margin-5px {
+  margin: 5px;
 }
 
 .margin-top-0 {

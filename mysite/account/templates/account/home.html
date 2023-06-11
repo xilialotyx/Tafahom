@@ -1,73 +1,344 @@
 {% extends 'account/layout.html' %} 
 {% block title %} صفحه اصلی {% endblock%} 
-{% block content %}
+{%block content %}
 
 <div class="row oakenwidgets">
   <div class="col-md-12 ui-sortable">
     <div class="panel panel-default with-border">
       <div class="panel-heading ui-sortable-handle">
-        <div class="panel-title">ایجاد فایل قالب<small>تسهیلات فناپ</small></div>
+        <div class="panel-title">
+          ایجاد فایل قالب<small>تسهیلات فناپ</small>
+        </div>
       </div>
       <div class="panel-body">
-        <form action=""
-        method="POST"
-        enctype="multipart/form-data"          >
-        {% csrf_token %}
-            <fieldset>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">دکمه رادیویی رنگی</label>
-                    <div class="col-md-12 ui-sortable">
-                       <div class="radio-styled radio-primary radio-inline">
-                          <input name="radios-normal-styled-2" id="radios-00" value="1" checked="checked" type="radio">
-                          <label for="radios-00">دکمه پیشفرض</label>
-                       </div>
-                       <div class="radio-styled radio-success radio-inline">
-                          <input name="radios-normal-styled-2" id="radios-11" value="2" type="radio">
-                          <label for="radios-11">دکمه قبول</label>
-                       </div>
-                       <div class="radio-styled radio-info radio-inline">
-                          <input name="radios-normal-styled-2" id="radios-22" value="3" type="radio">
-                          <label for="radios-22">دکمه اطلاع</label>
-                       </div>
-                       <div class="radio-styled radio-warning radio-inline">
-                          <input name="radios-normal-styled-2" id="radios-33" value="4" type="radio">
-                          <label for="radios-33">دکمه هشدار</label>
-                       </div>
-                       <div class="radio-styled radio-danger radio-inline">
-                          <input name="radios-normal-styled-2" id="radios-44" value="5" type="radio">
-                          <label for="radios-44">دکمه خطر</label>
-                       </div>
-                    </div>
-                 </div>
-                 <div class="row">
-                    <div class="col-md-4">
-                    <div class="form-group">
-                      <label class=" control-label" for="filebutton-normal">ارسال فایل</label>
-                      <span>شامل ستون های</span>[
-                      <span>شماره مشتری</span>,
-                      <span>مبلغ</span>,
-                      <span>مدت</span>,
-                      <span>توضیحات</span>]
-                      <div class="input-group">
-                        <span class="input-group-btn">
-                            <span class="btn btn-default btn-file">
-                              جستجو <input id="excel_file"
-                              name="excel_file" type="file" >
-                            </span>
-                        </span>
-                        <input type="text" class="form-control" readonly="">
-                      </div>
-    
-                    </div>
-                   </div>
-                   <div class="col-md-6">
-                    <div class="form-group">
-                      <label class=" control-label" for="filebutton-normal"></label>
-                      <div class="input-group">
-                   <button type="submit" class="btn btn-success">ارسال</button>
-                  </div></div></div>
+        <form action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset>
+            <div class="form-group">
+              <div
+                class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px"
+              >
+                <label class="control-label">نوع تشکیل پرونده</label>
+                <div class="ui-sortable">
+                  <div class="radio-styled radio-success radio-inline">
+                    <input
+                      name="type_tashkil"
+                      id="type_tashkil-1"
+                      value="1"
+                      checked="checked"
+                      type="radio"
+                    />
+                    <label for="type_tashkil-1">با امتیاز</label>
                   </div>
-            </fieldset>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input
+                      name="type_tashkil"
+                      id="type_tashkil-2"
+                      value="2"
+                      type="radio"
+                    />
+                    <label for="type_tashkil-2">بدون امتیاز</label>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px"
+              >
+                <label class="control-label">بیمه عمر</label>
+                <div class="ui-sortable">
+                  <div class="radio-styled radio-success radio-inline">
+                    <input
+                      name="bime"
+                      id="bime-1"
+                      value="1"
+                      checked="checked"
+                      type="radio"
+                    />
+                    <label for="bime-1">دارد</label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input name="bime" id="bime-0" value="0" type="radio" />
+                    <label for="bime-0">ندارد</label>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px"
+              >
+                <label class="control-label">واریز به حساب سایر</label>
+                <div class="ui-sortable">
+                  <div class="radio-styled radio-success radio-inline">
+                    <input
+                      name="variz_be_sayer"
+                      id="variz_be_sayer-1"
+                      value="1"
+                      type="radio"
+                    />
+                    <label for="variz_be_sayer-1">بله</label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input
+                      name="variz_be_sayer"
+                      id="variz_be_sayer-0"
+                      value="0"
+                      checked="checked"
+                      type="radio"
+                    />
+                    <label for="variz_be_sayer-0">خیر</label>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px"
+              >
+                <label class="control-label">شرایط اعطا</label>
+                <div class="ui-sortable">
+                  <div class="radio-styled radio-success radio-inline">
+                    <input
+                      name="ghesti_yekja"
+                      id="ghesti_yekja-1"
+                      value="1"
+                      checked="checked"
+                      type="radio"
+                    />
+                    <label for="ghesti_yekja-1">قسطی</label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input
+                      name="ghesti_yekja"
+                      id="ghesti_yekja-2"
+                      value="2"
+                      type="radio"
+                    />
+                    <label for="ghesti_yekja-2">یکجا</label>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px"
+              >
+                <label class="control-label">ارسال مستقیم برای امضا</label>
+                <div class="ui-sortable">
+                  <div class="radio-styled radio-success radio-inline">
+                    <input name="emza" id="emza-1" value="1" type="radio" />
+                    <label for="emza-1">بله</label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input
+                      name="emza"
+                      id="emza-0"
+                      value="0"
+                      checked="checked"
+                      type="radio"
+                    />
+                    <label for="emza-0">خیر</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div
+                class="col-md-10 with-shadow with-border border-radius-xs padding-10px margin-5px"
+              >
+                <label class="control-label">علت درخواست</label>
+                <div class="ui-sortable">
+                  <div class="radio-styled radio-success radio-inline">
+                    <input
+                      name="elat_darkhast"
+                      id="elat_darkhast-1"
+                      value="1"
+                      
+                      type="radio"
+                    />
+                    <label for="elat_darkhast-1">خرید مسکن</label>
+                  </div>
+                  <div class="radio-styled radio-primary radio-inline">
+                    <input
+                      name="elat_darkhast"
+                      id="elat_darkhast-10"
+                      value="10"
+                      type="radio"
+                    />
+                    <label for="elat_darkhast-10">ادای دین</label>
+                  </div>
+                  <div class="radio-styled radio-success radio-inline">
+                    <input
+                      name="elat_darkhast"
+                      id="elat_darkhast-2"
+                      value="2"
+                      type="radio"
+                    />
+                    <label for="elat_darkhast-2">درخواست مشتری</label>
+                  </div>
+                  <div class="radio-styled radio-info radio-inline">
+                    <input
+                      name="elat_darkhast"
+                      id="elat_darkhast-4"
+                      checked="checked"
+                      value="4"
+                      type="radio"
+                    />
+                    <label for="elat_darkhast-4">به دستور کمیته اعتباری مرکز</label>
+                  </div>
+                  <div class="radio-styled radio-warning radio-inline">
+                    <input
+                      name="elat_darkhast"
+                      id="elat_darkhast-5"
+                      value="5"
+                      type="radio"
+                    />
+                    <label for="elat_darkhast-5">به درخواست مشتری</label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input
+                      name="elat_darkhast"
+                      id="elat_darkhast-7"
+                      value="7"
+                      type="radio"
+                    />
+                    <label for="elat_darkhast-7">سایر موارد</label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input
+                      name="elat_darkhast"
+                      id="elat_darkhast-9"
+                      value="9"
+                      type="radio"
+                    />
+                    <label for="elat_darkhast-9">خرید نوت بوک</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-12 with-shadow with-border border-radius-xs padding-10px margin-5px" >
+                <label class="control-label">بخش اقتصادی</label>
+                <div class="ui-sortable">
+                  <div class="radio-styled radio-success radio-inline">
+                    <input name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-4-2" value="4-2" type="radio" />
+                    <label for="bakhsh_eghtesadi-4-2">کارکنان بانک <b dir="ltr">4-2</b></label>
+                  </div>
+                  <div class="radio-styled radio-primary radio-inline">
+                    <input name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-3-8" value="3-8" type="radio" />
+                    <label for="bakhsh_eghtesadi-3-8">تعمیرات مسکن <b dir="ltr">3-8</b></label>
+                  </div>
+                  <div class="radio-styled radio-success radio-inline">
+                    <input name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-5-3" value="5-3" type="radio" />
+                    <label for="bakhsh_eghtesadi-5-3">واردات <b dir="ltr">5-3</b></label>
+                  </div>
+                  <div class="radio-styled radio-info radio-inline">
+                    <input name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-5-1" value="5-1" type="radio" />
+                    <label for="bakhsh_eghtesadi-5-1">بازرگانی داخلی <b dir="ltr">5-1</b></label>
+                  </div>
+                  <div class="radio-styled radio-warning radio-inline">
+                    <input name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-6-10" value="6-10" checked="checked" type="radio" />
+                    <label for="bakhsh_eghtesadi-6-10">متفرقه <b dir="ltr">6-10</b></label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-9-1" value="9-1" type="radio" />
+                    <label for="bakhsh_eghtesadi-9-1">بخش دولتی <b dir="ltr">9-1</b></label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input  name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-9-3"  value="9-3" type="radio" />
+                    <label for="bakhsh_eghtesadi-9-3">بخش تعاونی <b dir="ltr">9-3</b></label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input  name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-9-4"  value="9-4" type="radio" />
+                    <label for="bakhsh_eghtesadi-9-4">سایر <b dir="ltr">9-4</b></label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input  name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-9-2"  value="9-2" type="radio" />
+                    <label for="bakhsh_eghtesadi-9-2">بخش خصوصی <b dir="ltr">9-2</b></label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input  name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-4-4"  value="4-4" type="radio" />
+                    <label for="bakhsh_eghtesadi-4-4">ازدواج <b dir="ltr">4-4</b></label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input  name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-4-12"  value="4-12" type="radio" />
+                    <label for="bakhsh_eghtesadi-4-12">جهیزیه <b dir="ltr">4-12</b></label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input  name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-4-1"  value="4-1" type="radio" />
+                    <label for="bakhsh_eghtesadi-4-1">تحصیلی <b dir="ltr">4-1</b></label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input  name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-3-9"  value="3-9" type="radio" />
+                    <label for="bakhsh_eghtesadi-3-9">مسکن روستایی <b dir="ltr">3-9</b></label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input  name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-3-11"  value="3-11" type="radio" />
+                    <label for="bakhsh_eghtesadi-3-11">ودیعه مسکن <b dir="ltr">3-11</b></label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input  name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-4-5"  value="4-5" type="radio" />
+                    <label for="bakhsh_eghtesadi-4-5">سایر تسهیلات قرض الحسنه <b dir="ltr">4-5</b></label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input  name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-4-13"  value="4-13" type="radio" />
+                    <label for="bakhsh_eghtesadi-4-13">درمان و بیماری <b dir="ltr">4-13</b></label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input  name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-4-3"  value="4-3" type="radio" />
+                    <label for="bakhsh_eghtesadi-4-3">خرید کالای اساسی <b dir="ltr">4-3</b></label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input  name="bakhsh_eghtesadi" id="bakhsh_eghtesadi-0-6"  value="0-6" type="radio" />
+                    <label for="bakhsh_eghtesadi-0-6">تولید و کشاورزی <b dir="ltr">0-6</b></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-12 with-shadow with-border border-radius-xs padding-10px margin-5px" >
+                <div class="col-md-4 checkbox-toggle-styled-on-off">
+                  <input name="checkboxes-validation2" id="checkboxes-101" value="101" type="checkbox" >
+                  <label for="checkboxes-101">مبلغ ثابت؟</label>
+                  <input type="text" class="form-control" id="number-validation" placeholder="مبلغ" >
+                </div>
+                <div class="col-md-1 checkbox-toggle-styled-on-off">
+                  <input name="checkboxes-validation2" id="checkboxes-101" value="101" type="checkbox" >
+                  <label for="checkboxes-101">مدت ثابت؟</label>
+                  <input type="text" class="form-control" id="number-validation" placeholder="مدت" >
+                </div>
+                <div class="col-md-7 checkbox-toggle-styled-on-off">
+                  <input name="checkboxes-validation2" id="checkboxes-101" value="101" type="checkbox" >
+                  <label for="checkboxes-101">توضیحات ثابت؟</label>
+                  <textarea class="form-control" name="message" id="message-validation"  ></textarea>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="control-label" for="filebutton-normal"
+                    >ارسال فایل</label
+                  >
+                  <span>شامل ستون های</span>[ <span>شماره مشتری</span>,
+                  <span>مبلغ</span>, <span>مدت</span>, <span>توضیحات</span>]
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <span class="btn btn-default btn-file">
+                        جستجو
+                        <input id="excel_file" name="excel_file" type="file" />
+                      </span>
+                    </span>
+                    <input type="text" class="form-control" readonly="" />
+                  </div>
+                </div>
+              </div>
+              
+            </div> -->
+            <div class="row">
+              <div class="form-group">
+                <label class="control-label" for="filebutton-normal"></label>
+                <div class="input-group">
+                  <button type="submit" class="btn btn-success">ارسال</button>
+                </div>
+              </div>
+            </div>
+            
+          </fieldset>
         </form>
       </div>
     </div>
