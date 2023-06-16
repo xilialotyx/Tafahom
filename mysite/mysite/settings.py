@@ -144,14 +144,11 @@ DATABASES = {
 # DATABASES = {
 #         'default': {
 #             'ENGINE': 'mssql',
-#             'NAME': 'mydb',
-#             'USER': 'user@myserver',
-#             'PASSWORD': 'password',
-#             'HOST': 'myserver.database.windows.net',
-#             'PORT': '',
+#             'NAME': 'Tafahom',
 
 #             'OPTIONS': {
-#                 'driver': 'ODBC Driver 17 for SQL Server',
+#                 'driver': 'SQL Server Native Client 11.0',
+                
 #             },
 #         },
 #     }

@@ -1,4 +1,5 @@
 {% extends 'account/layout.html' %} 
+{% load static %}
 {% block title %} صفحه اصلی {% endblock%} 
 {%block content %}
 
@@ -11,10 +12,36 @@
         </div>
       </div>
       <div class="panel-body">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" data-parsley-validate>
           {% csrf_token %}
           <fieldset>
             <div class="form-group">
+              <div
+                class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px"
+              >
+                <label class="control-label">شرایط اعطا</label>
+                <div class="ui-sortable">
+                  <div class="radio-styled radio-success radio-inline">
+                    <input
+                      name="ghesti_yekja"
+                      id="ghesti_yekja-1"
+                      value="1"
+                      checked="checked"
+                      type="radio"
+                    />
+                    <label for="ghesti_yekja-1">قسطی</label>
+                  </div>
+                  <div class="radio-styled radio-danger radio-inline">
+                    <input
+                      name="ghesti_yekja"
+                      id="ghesti_yekja-2"
+                      value="2"
+                      type="radio"
+                    />
+                    <label for="ghesti_yekja-2">یکجا</label>
+                  </div>
+                </div>
+              </div>
               <div
                 class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px"
               >
@@ -41,6 +68,7 @@
                   </div>
                 </div>
               </div>
+              
               <div
                 class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px"
               >
@@ -88,32 +116,7 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px"
-              >
-                <label class="control-label">شرایط اعطا</label>
-                <div class="ui-sortable">
-                  <div class="radio-styled radio-success radio-inline">
-                    <input
-                      name="ghesti_yekja"
-                      id="ghesti_yekja-1"
-                      value="1"
-                      checked="checked"
-                      type="radio"
-                    />
-                    <label for="ghesti_yekja-1">قسطی</label>
-                  </div>
-                  <div class="radio-styled radio-danger radio-inline">
-                    <input
-                      name="ghesti_yekja"
-                      id="ghesti_yekja-2"
-                      value="2"
-                      type="radio"
-                    />
-                    <label for="ghesti_yekja-2">یکجا</label>
-                  </div>
-                </div>
-              </div>
+              
               <div
                 class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px"
               >
@@ -135,6 +138,42 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px">
+              <div class="ui-sortable">
+                <div class="form-group has-feedback">
+                   <label class="control-label" for="vaam_type_code">کد نوع تسهیلات</label>
+                   <input type="text" data-parsley-type="number" class="form-control" id="vaam_type_code" name="vaam_type_code" placeholder="مثلا 110" required>
+                </div>
+             </div>
+            </div>
+            <div class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px">
+              <div class="ui-sortable">
+                <div class="form-group has-feedback">
+                   <label class="control-label" for="zirmanba_code">کد زیر منبع</label>
+                   <input type="text" data-parsley-type="number" class="form-control" id="zirmanba_code" name="zirmanba_code" placeholder="مثلا 1010770" required>
+                </div>
+             </div>
+            </div>
+            <div class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px">
+              <div class="ui-sortable">
+                <div class="form-group has-feedback">
+                   <label class="control-label" for="dore_tnafos">دوره تنفس</label>
+                   <input type="text" data-parsley-type="number" class="form-control" id="dore_tnafos" name="dore_tnafos" placeholder="دوره تنفس" value="0" required>
+                </div>
+             </div>
+            </div>
+            <div class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px">
+              <div class="ui-sortable">
+                <div class="form-group has-feedback">
+                   <label class="control-label" for="fasele_aghsat">فاصله میان اقساط</label>
+                   <input type="text" data-parsley-type="number" class="form-control" id="fasele_aghsat" name="fasele_aghsat" placeholder="دوره تنفس" value="1" required>
+                </div>
+             </div>
+            </div>
+
+
             </div>
             <div class="form-group">
               <div
@@ -290,50 +329,67 @@
               </div>
             </div>
             <div class="form-group">
-              <div class="col-md-12 with-shadow with-border border-radius-xs padding-10px margin-5px" >
-                <div class="col-md-4 checkbox-toggle-styled-on-off">
-                  <input name="checkboxes-validation2" id="checkboxes-101" value="101" type="checkbox" >
-                  <label for="checkboxes-101">مبلغ ثابت؟</label>
-                  <input type="text" class="form-control" id="number-validation" placeholder="مبلغ" >
-                </div>
-                <div class="col-md-1 checkbox-toggle-styled-on-off">
-                  <input name="checkboxes-validation2" id="checkboxes-101" value="101" type="checkbox" >
-                  <label for="checkboxes-101">مدت ثابت؟</label>
-                  <input type="text" class="form-control" id="number-validation" placeholder="مدت" >
-                </div>
-                <div class="col-md-7 checkbox-toggle-styled-on-off">
-                  <input name="checkboxes-validation2" id="checkboxes-101" value="101" type="checkbox" >
-                  <label for="checkboxes-101">توضیحات ثابت؟</label>
-                  <textarea class="form-control" name="message" id="message-validation"  ></textarea>
-                </div>
-              </div>
-            </div>
-            <!-- <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="control-label" for="filebutton-normal"
-                    >ارسال فایل</label
-                  >
-                  <span>شامل ستون های</span>[ <span>شماره مشتری</span>,
-                  <span>مبلغ</span>, <span>مدت</span>, <span>توضیحات</span>]
-                  <div class="input-group">
-                    <span class="input-group-btn">
-                      <span class="btn btn-default btn-file">
-                        جستجو
-                        <input id="excel_file" name="excel_file" type="file" />
-                      </span>
-                    </span>
-                    <input type="text" class="form-control" readonly="" />
+              <div class="col-md-3 with-shadow with-border border-radius-xs padding-10px margin-5px">
+                <div class="ui-sortable">
+                  <div class="form-group has-feedback">
+                     <label class="control-label" for="txt_mablagh">مبلغ</label>
+                     <input type="text" data-parsley-pattern="^-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$" class="form-control" id="txt_mablagh" name="txt_mablagh" placeholder="مبلغ" required>
                   </div>
-                </div>
+               </div>
+              </div>
+              <div class="col-md-1 with-shadow with-border border-radius-xs padding-10px margin-5px">
+                <div class="ui-sortable">
+                  <div class="form-group has-feedback">
+                     <label class="control-label" for="txt_modat">مدت</label>
+                     <input type="text" data-parsley-type="number" class="form-control" id="txt_modat" name="txt_modat" placeholder="مدت" required>
+                  </div>
+               </div>
+              </div>
+              <div class="col-md-7 with-shadow with-border border-radius-xs padding-10px margin-5px">
+                <div class="ui-sortable">
+                  <div class="form-group has-feedback">
+                     <label class="control-label" for="txt_des">توضیحات</label>
+                     <textarea   class="form-control" id="txt_des" name="txt_des" placeholder="توضیحات" required></textarea>
+                  </div>
+               </div>
               </div>
               
-            </div> -->
-            <div class="row">
+            </div>
+            <div class="form-group">
+              <div class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px">
+              <div class="ui-sortable">
+                <div class="form-group has-feedback">
+                   <label class="control-label" for="rahnama_code">کد راهنما</label>
+                   <input type="text" data-parsley-type="number" class="form-control" id="rahnama_code" name="rahnama_code" placeholder="کد راهنما" required>
+                </div>
+             </div>
+            </div>
+            <div class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px">
+              <div class="ui-sortable">
+                <div class="form-group has-feedback">
+                   <label class="control-label" for="proje_code">کد پروژه</label>
+                   <input type="text" data-parsley-type="number" class="form-control" id="proje_code" name="proje_code" placeholder="کد پروژه" required>
+                </div>
+             </div>
+            </div>
+            <div class="col-md-2 with-shadow with-border border-radius-xs padding-10px margin-5px">
+              <div class="ui-sortable">
+                <div class="form-group has-feedback">
+                   <label class="control-label" for="txt_count">تعداد ردیف</label>
+                   <input type="text" data-parsley-type="number" class="form-control" id="txt_count" name="txt_count" placeholder="تعداد ردیف" required>
+                </div>
+             </div>
+            </div>
+
+
+            </div>
+
+            
               <div class="form-group">
-                <label class="control-label" for="filebutton-normal"></label>
+                <div class="col-md-12 with-shadow with-border border-radius-xs padding-10px margin-5px" >
+                  
                 <div class="input-group">
-                  <button type="submit" class="btn btn-success">ارسال</button>
+                  <button type="submit" class="btn btn-success">دریافت اکسل</button>
                 </div>
               </div>
             </div>
@@ -346,3 +402,11 @@
   <!--col-md-4-->
 </div>
 {% endblock %}
+{% block script %} 
+<script src="{% static 'account/js/vendors/autonumeric/autoNumeric.min.js' %}"></script>
+
+<script >
+new AutoNumeric('#txt_mablagh',{allowDecimalPadding: false,maximumValue: "999999999999999"});
+</script>
+
+{% endblock script %}

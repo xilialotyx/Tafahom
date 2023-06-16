@@ -110,16 +110,14 @@
 </div>
 
 {% endblock content %} 
-{% block script %}
-<script>
+{% block script2 %}
+
+<script  type="text/javascript"  src="{% static 'account/js/vendors/datatables/datatables-examples.js' %}"></script>
+ <script>
   $(document).ready(function () {
     $("#tafahom-table").DataTable({
       order: [[3, "desc"]],
     });
   });
-</script>
-<script
-  type="text/javascript"
-  src="{% static 'account/js/vendors/datatables/datatables-examples.js' %}"
-></script>
-{% endblock script %}
+</script> 
+{% endblock script2 %}

@@ -16,6 +16,7 @@ class TafahomListView(ListView):
     model=Tafahom
     template_name = 'tafahom/list.html'  # Specify your own template name/location
 
+
     def get_queryset(self):
         tafahom_list = Tafahom.objects.all()
         search_param = self.request.GET.get('search_tafahom')

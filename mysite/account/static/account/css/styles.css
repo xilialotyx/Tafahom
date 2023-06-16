@@ -3606,12 +3606,12 @@ select.input-group-xs > .form-control,
 .has-success .checkbox,
 .has-success .radio-inline,
 .has-success .checkbox-inline {
-  color: #9ab946;
+  color: #6e930a;
 }
 
 .has-success .form-control {
-  border-color: #bcd185;
-  background: #bcd185;
+  border-color: #6e930a;
+  background: #9ac52a;
   color: #fff;
 }
 
